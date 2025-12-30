@@ -11,9 +11,9 @@ const menus = [
 
 export default function Header() {
   return (
-    <header className="w-full">
+    <header className="w-full ">
       {/* TOP BANNER */}
-      <div className="relative w-full aspect-[1500/205]">
+      <div className="relative w-full aspect-[1500/205] ">
         <Image
           src="/img/banner-2026.png"
           alt="Chúc mừng năm mới 2026"
@@ -33,9 +33,8 @@ export default function Header() {
             width={160}
             height={40}
           />
-
           {/* Actions */}
-          <div className="hidden md:flex items-center gap-4 text-sm">
+          <div className="max-sm:hidden md:flex items-center gap-4 text-sm">
             <button className="bg-red-600 text-white px-4 py-1 rounded-full">
               Đăng nhập
             </button>            

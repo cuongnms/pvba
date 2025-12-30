@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
 
 const categories = [
   "Nhịp sống",
@@ -11,19 +12,23 @@ const categories = [
   "Văn hóa Viettel",
 ];
 
-
-const MobileCategory = dynamic(
-  () => import("./MobileCategory"),
-  { ssr: false }
-);
+const MobileCategory = dynamic(() => import("./MobileCategory"), {
+  ssr: false,
+});
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [openCat, setOpenCat] = useState("");
+    const { resolvedTheme } = useTheme();
 
   return (
-    <div className="sticky top-0 z-50 bg-white border-b text-black">
-      <div className="max-w-[1200px] mx-auto px-4 max-sm:hidden">
-        <ul className="flex items-center gap-6 h-12 text-sm font-medium">
+    <div className={`sticky top-0 z-50 border-b ${resolvedTheme === 'dark' ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+      <div className="max-w-[1200px] mx-auto px-4 max-sm:hidden" >
+        <ul
+          className="flex items-center gap-6 h-12 text-sm font-medium"
+                    onMouseLeave={() => setOpenCat("")}
+
+        >
           <span className="inline-flex items-center text-center w-[2%]">
             <svg
               viewBox="0 0 25 21"
@@ -36,20 +41,42 @@ export default function Navbar() {
               ></path>
             </svg>
           </span>
-
           {categories.map((m) => (
-            <li key={m} className="hover:text-red-600 cursor-pointer">
-              {m}
+            <li
+              key={m}
+              className="relative cursor-pointer hover:text-red-600"
+              onMouseEnter={() => setOpenCat(m)}
+            >
+              {/* Text */}
+              <span className="px-1" >{m}</span>
+
+              {/* Dropdown */}
+              {openCat === m && (
+                <div className="absolute top-full left-0 mt-3.5 bg-white shadow-lg min-w-[180px] z-50"
+                          onMouseLeave={() => setOpenCat("")}
+
+                >
+                  <a className="block px-4 py-2 hover:bg-gray-100">
+                    Category 1
+                  </a>
+                  <a className="block px-4 py-2 hover:bg-gray-100">
+                    Category 2
+                  </a>
+                  <a className="block px-4 py-2 hover:bg-gray-100">
+                    Category 3
+                  </a>
+                </div>
+              )}
             </li>
           ))}
 
           <div className="flex-1" />
 
-          <button className="md:hidden">☰</button>
+          <button className="sm:hidden">☰</button>
         </ul>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 md:hidden">
+      <div className="max-w-[1200px] mx-auto px-4 sm:hidden">
         <ul className="flex items-center gap-6 h-12 text-sm font-medium">
           <Image
             src="/img/logo.jpg"
@@ -58,15 +85,19 @@ export default function Navbar() {
             height={40}
           />
           <div className="flex-1" />
-
-          <button className="md:hidden" onClick={() => setOpen(!open)}>
+          <li className="relative cursor-pointer hover:text-red-600">
+            <button className="bg-red-600 text-white px-4 py-1 rounded-full text-[10px]">
+              Đăng nhập
+            </button>
+          </li>
+          <button className="sm:hidden" onClick={() => setOpen(!open)}>
             ☰
           </button>
         </ul>
       </div>
 
-      <div className="h-[2px] bg-red-600" />
-       <MobileCategory open={open} onClose={() => setOpen(false)} />
+      <div className="h-[2px] bg-red-600 md:hidden" />
+      <MobileCategory open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
