@@ -44,25 +44,25 @@ export default function Navbar() {
           {categories.map((m) => (
             <li
               key={m}
-              className="relative cursor-pointer hover:text-red-600"
+              className="relative cursor-pointer  flex justify-center item-center"
               onMouseEnter={() => setOpenCat(m)}
             >
               {/* Text */}
-              <span className="px-1" >{m}</span>
+              <span className="px-1 hover:text-red-600" >{m}</span>
 
               {/* Dropdown */}
               {openCat === m && (
-                <div className="absolute top-full left-0 mt-3.5 bg-white shadow-lg min-w-[180px] z-50"
+                <div className="absolute top-full left-0 pt-3.5 bg-white shadow-lg min-w-[180px] z-50 "
                           onMouseLeave={() => setOpenCat("")}
 
                 >
-                  <a className="block px-4 py-2 hover:bg-gray-100">
+                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
                     Category 1
                   </a>
-                  <a className="block px-4 py-2 hover:bg-gray-100">
+                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
                     Category 2
                   </a>
-                  <a className="block px-4 py-2 hover:bg-gray-100">
+                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
                     Category 3
                   </a>
                 </div>
