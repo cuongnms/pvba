@@ -23,7 +23,7 @@ export default function ArticleCard({ article, size }: Props) {
               src={article.thumbnail}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 rounded-lg"
+              className="object-cover transition-transform duration-500 ease-out hover:scale-105 hover:brightness-90 rounded-lg"
             />
           </div>
 
@@ -48,17 +48,17 @@ export default function ArticleCard({ article, size }: Props) {
         </article>
       )}
       {size === ArticleSize.SMALL && (
-        <article className="rounded-lg flex items-start hover:shadow-md gap-2">
+        <article className="rounded-lg flex items-start hover:shadow-md gap-2 overflow-hidden">
           <div className={`relative w-30 aspect-square shrink-0`}>
             <Image
               src={article.thumbnail}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 rounded-lg"
+              className="object-cover transition-transform duration-500 ease-out hover:scale-105 rounded-lg"
             />
           </div>
           <div className="flex-1 min-w-0 flex flex-col gap-1">
-            <h3 className="text-sm md:text-base font-semibold text-left ">
+            <h3 className="text-sm md:text-base text-left ">
               {article.title}
             </h3>
 

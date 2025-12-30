@@ -25,16 +25,32 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.swiper-button-next,
+.swiper-button-prev {
   width: 36px;
   height: 36px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 9999px;
+  background-color: white;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 36px;
+  mask-size: 36px;
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 14px;
-  color: white;
+
+.swiper-button-next {
+  -webkit-mask-image: url('/img/right-arrow.svg');
+  mask-image: url('/img/right-arrow.svg');
+}
+
+.swiper-button-prev {
+  -webkit-mask-image: url('/img/right-arrow.svg');
+  mask-image: url('/img/right-arrow.svg');
+  transform: rotate(180deg);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
 }

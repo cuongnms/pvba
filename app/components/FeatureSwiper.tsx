@@ -11,12 +11,12 @@ const slides = [
   {
     title: 'Câu chuyện VĂN HÓA',
     desc: 'Những câu chuyện người thật, việc thật diễn ra ngay trong công việc hằng ngày...',
-    image: '/img/featured-1.jpg',
+    image: '/img/swiper/featured-1.png',
   },
   {
     title: 'Hành trình Viettel',
     desc: 'Giá trị cốt lõi được lan tỏa qua từng hành động nhỏ...',
-    image: '/img/featured-2.jpg',
+    image: '/img/swiper/featured-1.png',
   },
 ];
 

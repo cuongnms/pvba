@@ -129,7 +129,7 @@ const articles: Article[] = [
     isFeatured: true,
   },
   {
-    id: "6",
+    id: "7",
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
@@ -150,30 +150,10 @@ const articles: Article[] = [
     isFeatured: true,
   },
   {
-    id: "6",
+    id: "8",
     slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "CONG_NGHE",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
-  {
-    id: "6",
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ ứng dụng công nghệ để phát triển địa phương Viettel",
+    title:
+      "Viettel và Thái Nguyên dùng công nghệ ứng dụng công nghệ để phát triển địa phương Viettel",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
     content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
@@ -201,16 +181,15 @@ export default function FeaturedSection() {
       </div>
       <div className="lg:col-span-2">
         <div className="grid grid-cols-2 grid-rows-2 gap-8">
-          {articles.slice(1,5).map((a) => (
+          {articles.slice(1, 5).map((a) => (
             <ArticleCard key={a.id} article={a} size={ArticleSize.MED} />
           ))}
         </div>
       </div>
-     
-        {articles.slice(5).map((a) => (
-          <ArticleCard key={a.id} article={a} size={ArticleSize.SMALL} />
-        ))}
-      
+
+      {articles.slice(5).map((a) => (
+        <ArticleCard key={a.id} article={a} size={ArticleSize.SMALL} />
+      ))}
     </section>
   );
 }

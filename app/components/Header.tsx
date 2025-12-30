@@ -24,7 +24,7 @@ export default function Header() {
       </div>
 
       {/* LOGO + ACTION */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b max-sm:hidden">
         <div className="max-w-[1200px] mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <Image
