@@ -1,4 +1,4 @@
-import { ArticleFormat, ArticleSize } from "../types/article";
+import { Article, ArticleFormat, ArticleSize } from "../types/article";
 import ArticleCard from "./ArticleCard";
 const articles: Article[] = [
   {
