@@ -20,18 +20,18 @@ const slides = [
   },
 ];
 
-export default function FeaturedSwiper() {
+export default function FeatureSwiper() {
   return (
-    <section className="relative bg-[#2f2f2f] text-white my-[2%]">
+    <section className="relative bg-[#2f2f2f] text-white my-[4%]">
       <Swiper
         modules={[Navigation]}
         navigation
         loop
-        className="h-[420px] md:h-[480px]"
+        className="h-[420px] md:h-[480px] rounded-lg"
       >
         {slides.map((s, i) => (
           <SwiperSlide key={i}>
-            <div className="relative h-full">
+            <div className="relative h-full ">
               {/* IMAGE */}
               <Image
                 src={s.image}
@@ -45,8 +45,8 @@ export default function FeaturedSwiper() {
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
               {/* CONTENT */}
-              <div className="absolute inset-0">
-                <div className="max-w-[1000px] mx-auto h-full px-6 flex items-center">
+              <div className="absolute inset-0 ">
+                <div className="max-w-[1000px] mx-auto h-full px-6 flex items-center ">
                   <div className="max-w-lg">
                     <p className="uppercase tracking-widest text-sm mb-3">
                       Tiêu điểm

@@ -1,7 +1,5 @@
-"use client";
-import { Article, ArticleFormat, ArticleSize } from "../types/article";
+import { ArticleFormat, ArticleSize } from "../types/article";
 import ArticleCard from "./ArticleCard";
-
 const articles: Article[] = [
   {
     id: "1",
@@ -173,24 +171,29 @@ const articles: Article[] = [
     isFeatured: true,
   },
 ];
-
-export default function FeatureSection() {
+export default function FeatureList() {
   return (
-    <section className="mt-[2%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
-      <div className="lg:col-span-2">
-        <ArticleCard article={articles[0]} size={ArticleSize.LARGE} format={ArticleFormat.GRID} />
+    <section className="mt-[2%]">
+      <div className=" border-l-blue-900 border-l-2 mb-[2%]">
+        <p className="pl-2 text-lg font-bold">GIỚI THIỆU</p>
       </div>
-      <div className="lg:col-span-2">
-        <div className="grid grid-cols-2 grid-rows-2 gap-4">
-          {articles.slice(1, 5).map((a) => (
-            <ArticleCard key={a.id} article={a} size={ArticleSize.MED} format={ArticleFormat.GRID} />
+      <div className="grid grid-cols-3">
+        <div className="col-span-2">
+          {articles.slice().map((a) => (
+            <ArticleCard
+              key={a.id}
+              article={a}
+              size={ArticleSize.MED}
+              format={ArticleFormat.LIST}
+            />
           ))}
         </div>
+        <div>
+          <div className=" border-l-blue-900 border-l-2 mb-[2%]">
+            <p className="pl-2 text-lg font-bold">Xem nhiều</p>
+          </div>
+        </div>
       </div>
-
-      {articles.slice(5).map((a) => (
-        <ArticleCard key={a.id} article={a} size={ArticleSize.SMALL} format={ArticleFormat.GRID}/>
-      ))}
     </section>
   );
 }

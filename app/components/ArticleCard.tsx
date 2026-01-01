@@ -1,23 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Article, ArticleSize } from "../types/article";
+import { Article, ArticleFormat, ArticleSize } from "../types/article";
 
 interface Props {
   article: Article;
   size: ArticleSize;
+  format: ArticleFormat;
 }
 
-export default function ArticleCard({ article, size }: Props) {
+export default function ArticleCard({ article, size, format }: Props) {
   return (
     <Link href={`/article/${article.slug}`}>
       {(size === ArticleSize.LARGE || size === ArticleSize.MED) && (
-        <article className="rounded-lg overflow-hidden hover:shadow-md">
+        <article className={`rounded-lg overflow-hidden ${format === ArticleFormat.LIST ? "flex w-full h-50" :""}`}>
           <div
-            className={`relative ${
+            className={`relative overflow-hidden rounded-lg ${
               size === ArticleSize.LARGE
-                ? "h-[220px] md:h-[300px]"
-                : "h-[160px] md:h-[140px]"
-            }`}
+                ? "h-55 md:h-75" : "h-40"
+            } ${format === ArticleFormat.LIST ? "md:w-80 aspect-square shrink-0" : ""}`}
           >
             <Image
               src={article.thumbnail}
@@ -27,7 +27,7 @@ export default function ArticleCard({ article, size }: Props) {
             />
           </div>
 
-          <div className="py-4">
+          <div className={` ${format === ArticleFormat.LIST ? "px-4" :"py-4"}`}>
             <h3 className={`text-sm md:text-base lg:text-smfont-semibold`}>
               {article.title}
             </h3>
@@ -48,8 +48,8 @@ export default function ArticleCard({ article, size }: Props) {
         </article>
       )}
       {size === ArticleSize.SMALL && (
-        <article className="rounded-lg flex items-start hover:shadow-md gap-2 overflow-hidden">
-          <div className={`relative w-30 aspect-square shrink-0`}>
+        <article className="rounded-lg flex items-start gap-4">
+          <div className={`relative w-30 aspect-square shrink-0 overflow-hidden rounded-lg`}>
             <Image
               src={article.thumbnail}
               alt={article.title}
@@ -65,18 +65,7 @@ export default function ArticleCard({ article, size }: Props) {
             <p className="text-xs text-gray-500">{article.author.name}</p>
           </div>
 
-          {/* <div className="py-2 flex flex-col justify-between">
-            <h3
-              className={`text-sm md:text-base lg:text-sm font-semibold text-left line-clamp-4`}
-            >
-              {article.title}
-            </h3>
-            <h3
-              className={`text-sm md:text-base lg:text-sm`}
-            >
-              {article.author.name}
-            </h3>
-          </div> */}
+          
         </article>
       )}
     </Link>

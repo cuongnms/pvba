@@ -3,13 +3,14 @@ import Image from "next/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const categories = [
-  "Nhịp sống",
-  "Kinh doanh",
-  "Công nghệ",
-  "Tri thức",
-  "Văn hóa Viettel",
+  "Giới thiệu",
+  "Tin tức",
+  "Hoạt động",
+  "Văn hóa",
+  "Thông báo",
 ];
 
 const MobileCategory = dynamic(() => import("./MobileCategory"), {
@@ -19,17 +20,22 @@ const MobileCategory = dynamic(() => import("./MobileCategory"), {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState("");
-    const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
-    <div className={`sticky top-0 z-50 border-b ${resolvedTheme === 'dark' ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-      <div className="max-w-[1200px] mx-auto px-4 max-sm:hidden" >
+    <div
+      className={`sticky top-0 z-50 border-b ${
+        resolvedTheme === "dark"
+          ? "bg-black text-white"
+          : "bg-white text-black"
+      }`}
+    >
+      <div className="max-w-[1200px] mx-auto px-4 max-sm:hidden">
         <ul
           className="flex items-center gap-6 h-12 text-sm font-medium"
-                    onMouseLeave={() => setOpenCat("")}
-
+          onMouseLeave={() => setOpenCat("")}
         >
-          <span className="inline-flex items-center text-center w-[2%]">
+          <Link href="/" className="inline-flex items-center text-center w-[2%]">
             <svg
               viewBox="0 0 25 21"
               fill="none"
@@ -40,7 +46,7 @@ export default function Navbar() {
                 fill="currentColor"
               ></path>
             </svg>
-          </span>
+          </Link>
           {categories.map((m) => (
             <li
               key={m}
@@ -48,21 +54,21 @@ export default function Navbar() {
               onMouseEnter={() => setOpenCat(m)}
             >
               {/* Text */}
-              <span className="px-1 hover:text-red-600" >{m}</span>
+              <Link href="/gioi-thieu" className="px-1 hover:text-red-600">{m}</Link>
 
               {/* Dropdown */}
               {openCat === m && (
-                <div className="absolute top-full left-0 pt-3.5 bg-white shadow-lg min-w-[180px] z-50 "
-                          onMouseLeave={() => setOpenCat("")}
-
+                <div
+                  className={`absolute top-full left-0 pt-3.5 shadow-lg min-w-[180px] z-50 ${resolvedTheme === "dark" ? "bg-black" : "bg-white"}`}
+                  onMouseLeave={() => setOpenCat("")}
                 >
-                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
+                  <a className="block px-4 py-2 hover:text-red-600">
                     Category 1
                   </a>
-                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
+                  <a className="block px-4 py-2 hover:text-red-600">
                     Category 2
                   </a>
-                  <a className="block px-4 py-2 hover:bg-gray-100 hover:text-red-600">
+                  <a className="block px-4 py-2 hover:text-red-600">
                     Category 3
                   </a>
                 </div>

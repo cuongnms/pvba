@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="mt-10 py-6 text-center text-sm text-gray-500">
+    <footer className="mt-10 py-6 text-center text-sm text-gray-500 border-t">
       © Viettel Group
     </footer>
   );

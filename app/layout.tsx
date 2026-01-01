@@ -1,11 +1,11 @@
 import "@/app/(public)/globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import ScrollToTop from "../components/ScrollToTop";
-import DarkModeToggle from "../components/DarkModeToggle";
-// import { Providers } from "../providers/ThemeProvider";
+
 import { ThemeProvider } from "next-themes";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
+import DarkModeToggle from "./components/DarkModeToggle";
+import Footer from "./components/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

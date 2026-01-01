@@ -1,15 +1,20 @@
 export type ArticleStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
 
 export type ArticleCategory =
-  | "NHIP_SONG"
-  | "KINH_DOANH"
-  | "CONG_NGHE"
-  | "TRI_THUC"
-  | "VAN_HOA";
+  | "GIOI_THIEU"
+  | "TIN_TUC_SU_KIEN"
+  | "HOAT_DONG"
+  | "VAN_HOA"
+  | "THONG_BAO";
 
   export enum ArticleSize {
     SMALL, MED, LARGE
   }
+
+  export enum ArticleFormat {
+    GRID, LIST
+  }
+
 
 export interface Article {
   id: string;              // UUID hoặc Mongo ObjectId
@@ -33,3 +38,5 @@ export interface Article {
   status: ArticleStatus;
   isFeatured: boolean;
 }
+
+
