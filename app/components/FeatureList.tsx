@@ -1,167 +1,54 @@
-import { Article, ArticleFormat, ArticleSize } from "../types/article";
+import { ObjectId } from "mongodb";
+import { Article } from "../types/model";
 import ArticleCard from "./ArticleCard";
+import { ArticleFormat, ArticleSize } from "../types/ui";
 const articles: Article[] = [
   {
-    id: "1",
+    _id: new ObjectId("507f1f77bcf86cd799439011"),
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
+    createdAt: new Date("2024-12-30T10:00:00Z"),
+    updatedAt: new Date("2024-12-30T10:00:00Z"),
+    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    htmlContent: "",
+    textContent: "",
 
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
   },
   {
-    id: "2",
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-2.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
-  {
-    id: "3",
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-2.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
-  {
-    id: "4",
+    _id: new ObjectId("507f1f77bcf86cd799439011"),
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
+    createdAt: new Date("2024-12-30T10:00:00Z"),
+    updatedAt: new Date("2024-12-30T10:00:00Z"),
+    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    htmlContent: "",
+    textContent: "",
 
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
   },
   {
-    id: "5",
+    _id: new ObjectId("507f1f77bcf86cd799439011"),
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
+    createdAt: new Date("2024-12-30T10:00:00Z"),
+    updatedAt: new Date("2024-12-30T10:00:00Z"),
+    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    htmlContent: "",
+    textContent: "",
 
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
   },
-  {
-    id: "6",
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
-  {
-    id: "7",
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
-  {
-    id: "8",
-    slug: "viettel-thai-nguyen",
-    title:
-      "Viettel và Thái Nguyên dùng công nghệ ứng dụng công nghệ để phát triển địa phương Viettel",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    author: {
-      id: "a1",
-      name: "Viettel Group",
-    },
-
-    publishedAt: "2025-01-01T08:00:00Z",
-    createdAt: "2024-12-30T10:00:00Z",
-    updatedAt: "2024-12-31T09:00:00Z",
-
-    status: "PUBLISHED",
-    isFeatured: true,
-  },
+  
 ];
 export default function FeatureList() {
   return (
@@ -171,9 +58,9 @@ export default function FeatureList() {
       </div>
       <div className="grid grid-cols-3">
         <div className="col-span-2">
-          {articles.slice().map((a) => (
+          {articles.slice().map((a, idx) => (
             <ArticleCard
-              key={a.id}
+              key={idx}
               article={a}
               size={ArticleSize.MED}
               format={ArticleFormat.LIST}

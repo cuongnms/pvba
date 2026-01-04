@@ -1,6 +1,5 @@
 "use client";
 import { X, ChevronDown, ChevronUp, Search } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useState } from "react";
 
 export default function MobileCategoryDrawer({
@@ -11,16 +10,13 @@ export default function MobileCategoryDrawer({
   onClose: () => void;
 }) {
   const [active, setActive] = useState<string | null>("Kinh doanh");
-  const { resolvedTheme } = useTheme();
 
   const toggle = (key: string) => setActive(active === key ? null : key);
 
   return (
     <div
-      className={`fixed inset-0 z-[100] transition-transform duration-300
-        ${open ? "translate-x-0" : "translate-x-full"} ${
-        resolvedTheme === "dark" ? "bg-gray-900" : "bg-white"
-      }
+      className={`fixed inset-0 z-[100] transition-transform duration-300 bg-white
+        ${open ? "translate-x-0" : "translate-x-full"}
       `}
     >
       {/* Header */}

@@ -24,7 +24,6 @@ export default function HeaderNavbar() {
 
   return (
     <>
-      {/* ===== TOP BANNER (SCROLL SẼ MẤT) ===== */}
       <div className="relative w-full aspect-[1500/205]">
         <Image
           src="/img/banner-2026.png"
@@ -35,7 +34,6 @@ export default function HeaderNavbar() {
         />
       </div>
 
-      {/* ===== STICKY WRAPPER (PHẢI Ở NGOÀI HEADER) ===== */}
       <div className="sticky top-0 z-50">
         {/* HEADER */}
         <div className="border-b max-sm:hidden bg-white text-black">
@@ -72,7 +70,7 @@ export default function HeaderNavbar() {
                   </Link>
 
                   {openCat === m && (
-                    <div className="absolute top-full left-0 pt-3 min-w-[180px] shadow-lg bg-white dark:bg-black">
+                    <div className="absolute top-full left-0 pt-3 min-w-[180px] shadow-lg bg-white">
                       {["Category 1", "Category 2"].map((c) => (
                         <a
                           key={c}

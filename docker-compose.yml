@@ -1,23 +1,41 @@
 version: "3.9"
 
 services:
-  web:
-    build: .
-    container_name: pvba
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-    depends_on:
-      - mongo
-    restart: always
-
   mongo:
     image: mongo:6.0
     container_name: mongo
+    ports:
+      - "27017:27017"
     volumes:
-      - mongo-data:/data/db
-    restart: always
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping')"]
+      interval: 5s
+      retries: 5
+
+  db-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run init-db
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/pvba
+    restart: "no"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db-init
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongo:27017/pvba
 
 volumes:
-  mongo-data:
+  mongo_data:

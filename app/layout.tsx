@@ -6,12 +6,9 @@ import { ThemeProvider } from "next-themes";
 import ScrollToTop from "./components/ScrollToTop";
 import DarkModeToggle from "./components/DarkModeToggle";
 import Footer from "./components/Footer";
-import { initAdminIfNeeded } from "./lib/init";
 import HeaderNavbar from "./components/HeaderNavbar";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-    await initAdminIfNeeded();
-
   return (
     <html lang="vi" suppressHydrationWarning>
       <body>

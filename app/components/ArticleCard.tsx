@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Article, ArticleFormat, ArticleSize } from "../types/article";
+import { Article } from "../types/model";
+import { ArticleFormat, ArticleSize } from "../types/ui";
 
 interface Props {
   article: Article;
@@ -32,7 +33,7 @@ export default function ArticleCard({ article, size, format }: Props) {
               {article.title}
             </h3>
             <p className="text-xs text-gray-500 mt-1">
-              {new Date(article.publishedAt).toLocaleDateString("vi-VN")}
+              {new Date(article.createdAt).toLocaleDateString("vi-VN")}
             </p>
             {size === ArticleSize.LARGE && (
               <>
@@ -62,7 +63,7 @@ export default function ArticleCard({ article, size, format }: Props) {
               {article.title}
             </h3>
 
-            <p className="text-xs text-gray-500">{article.author.name}</p>
+            <p className="text-xs text-gray-500">{article.category}</p>
           </div>
 
           
