@@ -1,0 +1,114 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import LoginButton from "./LoginButton";
+
+const MobileCategory = dynamic(() => import("./MobileCategory"), {
+  ssr: false,
+});
+
+const categories = [
+  "Giới thiệu",
+  "Tin tức",
+  "Hoạt động",
+  "Văn hóa",
+  "Thông báo",
+];
+
+export default function HeaderNavbar() {
+  const [open, setOpen] = useState(false);
+  const [openCat, setOpenCat] = useState("");
+
+  return (
+    <>
+      {/* ===== TOP BANNER (SCROLL SẼ MẤT) ===== */}
+      <div className="relative w-full aspect-[1500/205]">
+        <Image
+          src="/img/banner-2026.png"
+          alt="Chúc mừng năm mới 2026"
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
+
+      {/* ===== STICKY WRAPPER (PHẢI Ở NGOÀI HEADER) ===== */}
+      <div className="sticky top-0 z-50">
+        {/* HEADER */}
+        <div className="border-b max-sm:hidden bg-white text-black">
+          <div className="max-w-[1200px] mx-auto px-4 py-3 flex items-center justify-between">
+            <Image
+              src="/img/logo.jpg"
+              alt="Viettel Family"
+              width={160}
+              height={40}
+            />
+            <LoginButton />
+          </div>
+        </div>
+
+        {/* NAVBAR DESKTOP */}
+        <nav className="border-b max-sm:hidden bg-white text-black">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <ul
+              className="flex items-center gap-6 h-12 text-sm font-medium"
+              onMouseLeave={() => setOpenCat("")}
+            >
+              <Link href="/" className="inline-flex items-center w-[2%]">
+                🏠
+              </Link>
+
+              {categories.map((m) => (
+                <li
+                  key={m}
+                  className="relative cursor-pointer"
+                  onMouseEnter={() => setOpenCat(m)}
+                >
+                  <Link href="/gioi-thieu" className="hover:text-red-600">
+                    {m}
+                  </Link>
+
+                  {openCat === m && (
+                    <div className="absolute top-full left-0 pt-3 min-w-[180px] shadow-lg bg-white dark:bg-black">
+                      {["Category 1", "Category 2"].map((c) => (
+                        <a
+                          key={c}
+                          className="block px-4 py-2 hover:text-red-600"
+                        >
+                          {c}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+
+              <div className="flex-1" />
+            </ul>
+          </div>
+        </nav>
+
+        {/* MOBILE */}
+        <div className="sm:hidden border-b bg-white text-black ">
+          <div className="px-4 h-12 flex items-center">
+            <Image src="/img/logo.jpg" alt="logo" width={140} height={36} />
+            <div className="flex-1" />
+            <LoginButton />
+            <button
+              className="text-xl mx-4"
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+            >
+              ☰
+            </button>
+          </div>
+
+          <MobileCategory open={open} onClose={() => setOpen(false)} />
+        </div>
+      </div>
+    </>
+  );
+}

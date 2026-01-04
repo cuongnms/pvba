@@ -6,7 +6,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -27,7 +26,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-2.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -48,7 +46,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-2.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -69,7 +66,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -90,7 +86,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -111,7 +106,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -132,7 +126,6 @@ const articles: Article[] = [
     slug: "viettel-thai-nguyen",
     title: "Viettel và Thái Nguyên dùng công nghệ...",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 
@@ -154,7 +147,6 @@ const articles: Article[] = [
     title:
       "Viettel và Thái Nguyên dùng công nghệ ứng dụng công nghệ để phát triển địa phương Viettel",
     summary: "Ứng dụng công nghệ để phát triển địa phương",
-    content: "<p>Nội dung bài viết...</p>",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
 

@@ -15,28 +15,36 @@ export type ArticleCategory =
     GRID, LIST
   }
 
+  export type LoginState = {
+  error?: string;
+  success?: boolean;
+};
+
 
 export interface Article {
   id: string;              // UUID hoặc Mongo ObjectId
   slug: string;            // viettel-thai-nguyen
   title: string;
   summary: string;         // mô tả ngắn
-  content: string;         // HTML hoặc Markdown
   thumbnail: string;       // URL ảnh
   category: ArticleCategory;
-
   author: {
     id: string;
     name: string;
-    avatar?: string;
   };
-
   publishedAt: string;     // ISO string
   createdAt: string;
   updatedAt: string;
-
   status: ArticleStatus;
   isFeatured: boolean;
 }
 
 
+export interface User {
+  _id?: string;
+  email: string;
+  password: string;
+  name: string;
+  role: "admin" | "user";
+  createdAt: Date;
+}
