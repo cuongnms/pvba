@@ -1,5 +1,4 @@
 import Image from "next/image";
-import LoginModal from "./LoginModal";
 import LoginButton from "./LoginButton";
 
 const menus = [
@@ -38,7 +37,7 @@ export default function Header() {
           />
           {/* Actions */}
           <div className="max-sm:hidden md:flex items-center gap-4 text-sm">
-                     <LoginButton />
+          <LoginButton />
                    
           </div>
         </div>

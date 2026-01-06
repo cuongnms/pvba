@@ -8,6 +8,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.runCommand('ping')"]
       interval: 5s
@@ -19,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - mongo
+      - db
     ports:
       - "3000:3000"
     environment:

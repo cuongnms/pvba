@@ -5,7 +5,7 @@ import clientPromise from "../lib/mongodb";
 
 async function getArticlesCollection() {
   const client = await clientPromise;
-  return client.db("mydb").collection<Article>("articles");
+  return client.db("pvba").collection<Article>("articles");
 }
 
 export async function createArticle(

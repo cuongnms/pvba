@@ -12,6 +12,7 @@ export type ArticleCategory =
 export interface User {
   _id?: ObjectId;
   email: string;
+  userId: string;
   userName: string;
   password: string;
   firstName: string;

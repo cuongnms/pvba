@@ -1,18 +1,31 @@
-// mongo-init/init.js
-
-db = db.getSiblingDB("pvba");
+const pvba = db.getSiblingDB("pvba");
 
 // users
-db.createCollection("users");
-db.users.createIndex({ email: 1 }, { unique: true });
-db.users.createIndex({ username: 1 }, { unique: true });
-db.users.createIndex({ role: 1 });
+pvba.createCollection("users");
+pvba.users.createIndex({ userId: 1 }, { unique: true });
+pvba.users.createIndex({ email: 1 }, { unique: true });
+pvba.users.createIndex({ userName: 1 }, { unique: true });
+pvba.users.createIndex({ role: 1 });
 
 // articles
-db.createCollection("articles");
-db.articles.createIndex({ slug: 1 }, { unique: true });
-db.articles.createIndex({ category: 1, createdAt: -1 });
-db.articles.createIndex({ authorId: 1 });
+pvba.createCollection("articles");
+pvba.articles.createIndex({ slug: 1 }, { unique: true });
+pvba.articles.createIndex({ category: 1, createdAt: -1 });
+pvba.articles.createIndex({ authorId: 1 });
 
-// đảm bảo DB được tạo (fallback)
-db._init.insertOne({ createdAt: new Date() });
+// admin user
+const admin = pvba.users.findOne({ userName: "admin" });
+
+if (!admin) {
+  pvba.users.insertOne({
+    userId: "admin-uuid-1234",
+    userName: "admin",
+    email: "admin@example.com",
+    password: "$2b$10$YGVbPHJEwEXsQUcNiZk.6O9i2oPU4Ajc2nXJViYXAh0bWodQcMHL.",
+    role: "ADMIN",
+    createdAt: new Date(),
+  });
+  print("✅ Default admin user created");
+} else {
+  print("ℹ️ Admin user already exists");
+}

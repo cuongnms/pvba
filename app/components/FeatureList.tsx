@@ -13,7 +13,7 @@ const articles: Article[] = [
 
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
 
@@ -28,7 +28,7 @@ const articles: Article[] = [
 
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
 
@@ -43,7 +43,7 @@ const articles: Article[] = [
 
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
 

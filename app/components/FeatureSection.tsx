@@ -13,7 +13,7 @@ const articles: Article[] = [
     category: "TIN_TUC_SU_KIEN",
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
 
@@ -28,7 +28,7 @@ const articles: Article[] = [
 
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
 
@@ -40,10 +40,9 @@ const articles: Article[] = [
     summary: "Ứng dụng công nghệ để phát triển địa phương",
     thumbnail: "/img/news/new-1.jpg",
     category: "TIN_TUC_SU_KIEN",
-
     createdAt: new Date("2024-12-30T10:00:00Z"),
     updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorId: new ObjectId("507f1f77bcf86cd799439011"),
+    authorName: "ADMIN",
     htmlContent: "",
     textContent: "",
   },

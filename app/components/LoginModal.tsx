@@ -1,18 +1,26 @@
 "use client";
 
-import { useActionState } from "react";
-import { LoginState } from "../types/ui";
-import { loginService } from "../services/auth";
-
-const initialState: LoginState = {
-  success: false
-};
+import { FormEvent } from "react";
+import { signIn } from "next-auth/react";
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
-  const [state, formAction] = useActionState(loginService, initialState);
+  async function handleLogin(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
-  if (state.success) {
-    window.location.reload();
+    const username = (formData.get("username") as string)?.trim();
+const password = (formData.get("password") as string)?.trim();
+    const res = await signIn("credentials", {
+      username,
+      password,
+      redirect: false,
+    });
+
+    if (res?.ok) {
+      window.location.href = "/dashboard";
+    } else {
+      alert("Login failed");
+    }
   }
 
   return (
@@ -27,7 +35,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
 
         <h2 className="text-lg font-semibold mb-4">Login</h2>
 
-        <form action={formAction} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <input
             name="username"
             placeholder="Username"
@@ -41,8 +49,6 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
             className="border w-full p-2 rounded"
           />
 
-          {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
-
           <button
             type="submit"
             className="w-full bg-black text-white py-2 rounded"
@@ -54,4 +60,3 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
-
