@@ -83,6 +83,7 @@ export default function HeaderNavbar() {
                   )}
                 </li>
               ))}
+              {/* <LoginButton /> */}
 
               <div className="flex-1" />
             </ul>

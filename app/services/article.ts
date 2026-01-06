@@ -1,13 +1,12 @@
 import { ObjectId } from "mongodb";
 
-import { Article } from "../types/model";
+import { Article, ArticleUpdateInput } from "../types/model";
 import clientPromise from "../lib/mongodb";
 
 async function getArticlesCollection() {
   const client = await clientPromise;
   return client.db("mydb").collection<Article>("articles");
 }
-
 
 export async function createArticle(
   data: Omit<Article, "_id" | "createdAt" | "updatedAt">
@@ -18,19 +17,24 @@ export async function createArticle(
     ...data,
     createdAt: new Date(),
   };
-
   const result = await articles.insertOne(article);
   return result.insertedId;
 }
 
 export async function findArticleBySlug(slug: string) {
   const articles = await getArticlesCollection();
-  return articles.findOne({ slug });
+  const doc = await articles.findOne({ slug });
+  if (!doc) return null;
+
+  const { _id, ...article } = doc;
+  return article;
 }
 
-export async function findArticleById(id: string) {
+export async function searchByContent(text: string) {
   const articles = await getArticlesCollection();
-  return articles.findOne({ _id: new ObjectId(id) });
+  articles.find({
+    $text: { $search: text },
+  });
 }
 
 export async function listArticles({
@@ -65,27 +69,21 @@ export async function listArticles({
 }
 
 
-export async function updateArticle(
-  articleId: string,
-  data: Partial<
-    Pick<
-      Article,
-      | "title"
-      | "summary"
-      | "category"
-      | "htmlContent"
-      | "textContent"
-      | "thumbnail"
-    >
-  >
-) {
+export async function updateArticle(slug: string, data: ArticleUpdateInput) {
   const articles = await getArticlesCollection();
+  const updateData: ArticleUpdateInput = {};
+
+  if (data.category !== undefined) updateData.category = data.category;
+  if (data.htmlContent !== undefined) updateData.htmlContent = data.htmlContent;
+  if (data.textContent !== undefined) updateData.textContent = data.textContent;
+  if (data.summary !== undefined) updateData.summary = data.summary;
+  if (data.thumbnail !== undefined) updateData.thumbnail = data.thumbnail;
 
   return articles.updateOne(
-    { _id: new ObjectId(articleId) },
+    { slug: slug },
     {
       $set: {
-        ...data,
+        ...updateData,
         updatedAt: new Date(),
       },
     }

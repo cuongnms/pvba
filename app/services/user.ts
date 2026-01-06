@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import clientPromise from "../lib/mongodb";
-import { User, UserRole } from "../types/model";
+import { User, UserUpdateInput } from "../types/model";
+import { mapperUser, toUser } from "../types/mapper/mapper";
 
 async function getUsersCollection() {
   const client = await clientPromise;
@@ -21,35 +22,43 @@ export async function createUser(
   return result.insertedId;
 }
 
-export async function findUserByEmail(email: string) {
+export async function findUserByEmail(email: string): Promise<User | null> {
   const users = await getUsersCollection();
-  return users.findOne({ email });
+  const doc = await users.findOne({ email });
+  if (!doc) return null;
+
+  const { _id, ...user } = doc;
+  return user;
 }
 
-export async function findUserByUsername(username: string) {
+export async function findUserByUsername(userName: string) {
   const users = await getUsersCollection();
-  return users.findOne({ username });
-}
+  const doc = await users.findOne({ userName });
+  if (!doc) return null;
 
-export async function findUserById(id: string) {
-  const users = await getUsersCollection();
-  return users.findOne({ _id: new ObjectId(id) });
+  const { _id, ...user } = doc;
+  return user;
 }
 
 export async function updateUser(
-  userId: string,
-  data: Partial<Pick<User, "email" | "firstName" | "lastName">>
+  username: string,
+  data: UserUpdateInput
 ) {
   const users = await getUsersCollection();
+  const updateData: UserUpdateInput = {};
 
+  if (data.firstName !== undefined) updateData.firstName = data.firstName;
+
+  if (data.lastName !== undefined) updateData.lastName = data.lastName;
+
+  if (data.phoneNumber !== undefined) updateData.phoneNumber = data.phoneNumber;
   return users.updateOne(
-    { _id: new ObjectId(userId) },
+    { userName: username },
     {
       $set: {
-        ...data,
+        ...updateData,
         updatedAt: new Date(),
       },
     }
   );
 }
-

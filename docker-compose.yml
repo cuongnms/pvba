@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-  mongo:
+  db:
     image: mongo:6.0
-    container_name: mongo
+    container_name: pvba-db
     ports:
       - "27017:27017"
     volumes:
@@ -13,24 +13,13 @@ services:
       interval: 5s
       retries: 5
 
-  db-init:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: npm run init-db
-    depends_on:
-      mongo:
-        condition: service_healthy
-    environment:
-      MONGODB_URI: mongodb://mongo:27017/pvba
-    restart: "no"
-
   web:
+    container_name: pvba-web
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db-init
+      - mongo
     ports:
       - "3000:3000"
     environment:
