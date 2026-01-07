@@ -1,10 +1,10 @@
 import "@/app/(public)/globals.css";
 
 import { ThemeProvider } from "next-themes";
-import ScrollToTop from "./components/ScrollToTop";
-import DarkModeToggle from "./components/DarkModeToggle";
-import Footer from "./components/Footer";
-import HeaderNavbar from "./components/HeaderNavbar";
+import ScrollToTop from "./component/ScrollToTop";
+import DarkModeToggle from "./component/DarkModeToggle";
+import Footer from "./component/Footer";
+import HeaderNavbar from "./component/HeaderNavbar";
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "./providers/AuthProvider";
 

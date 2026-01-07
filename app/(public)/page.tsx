@@ -1,6 +1,6 @@
 
-import FeaturedSection from "../components/FeatureSection";
-import FeaturedSwiper from "../components/FeatureSwiper";
+import FeaturedSection from "../component/FeatureSection";
+import FeaturedSwiper from "../component/FeatureSwiper";
 
 export default function HomePage() {
   return (

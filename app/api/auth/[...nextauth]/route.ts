@@ -25,11 +25,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
         // 🔹 SAMPLE USER (demo)
-        const hashval = await bcrypt.hash("123456", 10);
-        console.log("pass: " , user.password);
-        console.log("hash: ",  hashval);
         const ok = await bcrypt.compare(credentials.password, user.password);
-        console.log("ok result:", ok)
         if (!ok) return null;
 
         return {

@@ -1,4 +1,4 @@
-import FeatureList from "../components/FeatureList";
+import FeatureList from "../component/FeatureList";
 
 export default async function ArticleCategory({
   params,
