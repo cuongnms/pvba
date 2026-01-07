@@ -24,7 +24,9 @@ export const authOptions: NextAuthOptions = {
         if (!user) {
           return null;
         }
-        // 🔹 SAMPLE USER (demo)
+        console.log(user.password);
+        console.log(credentials.password);
+        console.log(bcrypt.hash("123456", 10));
         const ok = await bcrypt.compare(credentials.password, user.password);
         if (!ok) return null;
 

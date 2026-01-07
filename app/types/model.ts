@@ -8,7 +8,7 @@ export type ArticleCategory =
   | "VAN_HOA"
   | "THONG_BAO";
 
-  export type UserRole = "ADMIN" | "EDITOR" | "USER"
+export type UserRole = "ADMIN" | "EDITOR" | "USER";
 export interface User {
   _id?: ObjectId;
   email: string;
