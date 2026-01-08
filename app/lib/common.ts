@@ -13,14 +13,13 @@ export type MenuItem = {
 //   "Thông báo",
 
 export const MENU: MenuItem[] = [
-  { label: "Trang chủ", href: "/" },
   { label: "Giới thiệu", href: "/gioi-thieu" },
   { label: "Tin tức", href: "/tin-tuc" },
   { label: "Hoạt động", href: "/hoat-dong" },
   { label: "Văn hóa", href: "/van-hoa" },
   { label: "Thông báo", href: "/thong-bao" },
-  { label: "Quản lý user", href: "/user", roles: ["ADMIN"] },
-  { label: "Quản lý bài viết", href: "/bai-viet", roles: ["ADMIN", "EDITOR"] },
+  { label: "Quản lý user", href: "/admin/user", roles: ["ADMIN"] },
+  { label: "Quản lý bài viết", href: "/admin/bai-viet", roles: ["ADMIN", "EDITOR"] },
 ];
 
 export function filterMenuByRole(menu: MenuItem[], role?: UserRole) {

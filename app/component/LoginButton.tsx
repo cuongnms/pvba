@@ -12,7 +12,7 @@ export default function LoginButton() {
     return (
       <>
         <button
-          className="bg-red-600 text-white px-4 py-1 rounded-full"
+          className="bg-red-600 text-white px-4 py-1 rounded-full max-sm:text-[10px]"
           onClick={() => setOpen(true)}
         >
           Đăng nhập
@@ -24,13 +24,13 @@ export default function LoginButton() {
 
   if(session.user.role === "ADMIN") {
     <>
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 items-center max-sm:text-[10px]">
         Xin chào, {session.user.name}
         <button
           className="bg-red-600 text-white px-4 py-1 rounded-full"
           onClick={() =>
             signOut({
-              callbackUrl: "/admin", // redirect sau logout
+              callbackUrl: "/",
             })
           }
         >
@@ -41,13 +41,13 @@ export default function LoginButton() {
   }
   return (
     <>
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 items-center max-sm:text-xs">
         Xin chào, {session.user.name}
         <button
           className="bg-red-600 text-white px-4 py-1 rounded-full"
           onClick={() =>
             signOut({
-              callbackUrl: "/", // redirect sau logout
+              callbackUrl: "/",
             })
           }
         >

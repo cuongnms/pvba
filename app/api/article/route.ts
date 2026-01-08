@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2️⃣ Check role (optional nhưng rất nên)
     if (!["ADMIN", "EDITOR"].includes(session.user?.role ?? "")) {
       return NextResponse.json(
         { error: "Forbidden" },

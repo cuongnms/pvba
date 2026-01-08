@@ -10,8 +10,12 @@ interface Props {
 }
 
 export default function ArticleCard({ article, size, format }: Props) {
+  const thumbnail =
+  article.thumbnail && article.thumbnail.trim() !== ""
+    ? article.thumbnail
+    : "/img/default.png";
   return (
-    <Link href={`/article/${article.slug}`}>
+    <Link href={`/${article.category}/${article.slug}`}>
       {(size === ArticleSize.LARGE || size === ArticleSize.MED) && (
         <article className={`rounded-lg overflow-hidden ${format === ArticleFormat.LIST ? "flex w-full h-50" :""}`}>
           <div
@@ -21,7 +25,7 @@ export default function ArticleCard({ article, size, format }: Props) {
             } ${format === ArticleFormat.LIST ? "md:w-80 aspect-square shrink-0" : ""}`}
           >
             <Image
-              src={article.thumbnail}
+              src={thumbnail}
               alt={article.title}
               fill
               className="object-cover transition-transform duration-500 ease-out hover:scale-105 hover:brightness-90 rounded-lg"
@@ -38,10 +42,7 @@ export default function ArticleCard({ article, size, format }: Props) {
             {size === ArticleSize.LARGE && (
               <>
                 <p className="mt-[3%] text-sm">
-                  Chiều 29/12, Viettel và UBND tỉnh Thái Nguyên ký kết thỏa
-                  thuận hợp tác giai đoạn 2026–2030. Chương trình nhằm cụ thể
-                  hóa việc thực hiện Nghị quyết số 57-NQ/TW ngày 22/12/2024 của
-                  Bộ Chính trị.
+                  {article.summary}
                 </p>
               </>
             )}

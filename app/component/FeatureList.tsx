@@ -1,62 +1,18 @@
 import { ObjectId } from "mongodb";
-import { Article } from "../types/model";
+import { Article, ArticleCategory } from "../types/model";
 import ArticleCard from "./ArticleCard";
 import { ArticleFormat, ArticleSize } from "../types/ui";
-const articles: Article[] = [
-  {
-    _id: new ObjectId("507f1f77bcf86cd799439011"),
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
+import { listArticles } from "../services/article";
 
-    createdAt: new Date("2024-12-30T10:00:00Z"),
-    updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorName: "ADMIN",
-    htmlContent: "",
-    textContent: "",
-
-  },
-  {
-    _id: new ObjectId("507f1f77bcf86cd799439011"),
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    createdAt: new Date("2024-12-30T10:00:00Z"),
-    updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorName: "ADMIN",
-    htmlContent: "",
-    textContent: "",
-
-  },
-  {
-    _id: new ObjectId("507f1f77bcf86cd799439011"),
-    slug: "viettel-thai-nguyen",
-    title: "Viettel và Thái Nguyên dùng công nghệ...",
-    summary: "Ứng dụng công nghệ để phát triển địa phương",
-    thumbnail: "/img/news/new-1.jpg",
-    category: "TIN_TUC_SU_KIEN",
-
-    createdAt: new Date("2024-12-30T10:00:00Z"),
-    updatedAt: new Date("2024-12-30T10:00:00Z"),
-    authorName: "ADMIN",
-    htmlContent: "",
-    textContent: "",
-
-  },
+export default async function FeatureList({category, label}: {category?: ArticleCategory, label?: string}) {
+  const articles = await listArticles({ category: category,limit: 10 });
   
-];
-export default function FeatureList() {
   return (
     <section className="mt-[2%]">
-      <div className=" border-l-blue-900 border-l-2 mb-[2%]">
-        <p className="pl-2 text-lg font-bold">GIỚI THIỆU</p>
+      <div className=" md:border-l-blue-900 md:border-l-2 mb-[2%]">
+        <p className="pl-2 text-lg font-bold">{label}</p>
       </div>
-      <div className="grid grid-cols-3">
+      <div className="md:grid md:grid-cols-3">
         <div className="col-span-2">
           {articles.slice().map((a, idx) => (
             <ArticleCard

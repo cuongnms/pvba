@@ -47,7 +47,6 @@ export async function listArticles({
   skip?: number;
 }) {
   const articles = await getArticlesCollection();
-
   const filter: any = {};
   if (category) filter.category = category;
 

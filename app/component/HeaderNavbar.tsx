@@ -11,13 +11,6 @@ const MobileCategory = dynamic(() => import("./MobileCategory"), {
   ssr: false,
 });
 
-const categories = [
-  "Giới thiệu",
-  "Tin tức",
-  "Hoạt động",
-  "Văn hóa",
-  "Thông báo",
-];
 
 export default function HeaderNavbar({
   menu,
@@ -70,25 +63,11 @@ export default function HeaderNavbar({
                   className="relative cursor-pointer"
                   onMouseEnter={() => setOpenCat(m.href)}
                 >
-                  <Link href={m.href} className="hover:text-red-600">
+                  <Link href={m.href} onClick={() => console.log("click ", m.href)}className="hover:text-red-600">
                     {m.label}
                   </Link>
-
-                  {openCat === m.href && (
-                    <div className="absolute top-full left-0 pt-3 min-w-[180px] shadow-lg bg-white">
-                      {["Category 1", "Category 2"].map((c) => (
-                        <a
-                          key={c}
-                          className="block px-4 py-2 hover:text-red-600"
-                        >
-                          {c}
-                        </a>
-                      ))}
-                    </div>
-                  )}
                 </li>
               ))}
-              {/* <LoginButton /> */}
 
               <div className="flex-1" />
             </ul>
@@ -102,7 +81,7 @@ export default function HeaderNavbar({
             <div className="flex-1" />
             <LoginButton />
             <button
-              className="text-xl mx-4"
+              className="text-xl mx-4 flex justify-center items-center leading-none"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
             >
@@ -110,7 +89,7 @@ export default function HeaderNavbar({
             </button>
           </div>
 
-          <MobileCategory open={open} onClose={() => setOpen(false)} />
+          <MobileCategory menu={menu} open={open} onClose={() => setOpen(false)} />
         </div>
       </div>
     </>

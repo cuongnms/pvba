@@ -1,11 +1,15 @@
 "use client";
 import { X, ChevronDown, ChevronUp, Search } from "lucide-react";
 import { useState } from "react";
+import { MenuItem } from "../lib/common";
+import Link from "next/link";
 
 export default function MobileCategoryDrawer({
+  menu,
   open,
   onClose,
 }: {
+  menu: MenuItem[];
   open: boolean;
   onClose: () => void;
 }) {
@@ -40,17 +44,12 @@ export default function MobileCategoryDrawer({
           />
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-between mt-4 text-sm font-medium border-b">
-          <button className="pb-2 border-b-2 border-black">
-            Xem theo đơn vị
-          </button>
-          <button className="pb-2 text-gray-400">Mới nhất</button>
-        </div>
-
-        <div className="mt-4 text-sm text-gray-500">Tất cả chuyên mục</div>
-
-        {/* Accordions */}
+        {menu.map((m, index) => (
+          <Link key={index} href={m.href} onClick={onClose} >
+            <Accordion title={m.label} />
+          </Link>
+        ))}
+        {/* Accordions
         <Accordion title="Nhịp sống" />
 
         <Accordion
@@ -70,7 +69,7 @@ export default function MobileCategoryDrawer({
         <Accordion title="Công nghệ" />
         <Accordion title="Tri thức" />
         <Accordion title="Văn hóa Viettel" />
-        <Accordion title="Vì Viettel tốt lên" />
+        <Accordion title="Vì Viettel tốt lên" /> */}
       </div>
     </div>
   );
