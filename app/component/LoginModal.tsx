@@ -7,9 +7,8 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
     const username = (formData.get("username") as string)?.trim();
-const password = (formData.get("password") as string)?.trim();
+    const password = (formData.get("password") as string)?.trim();
     const res = await signIn("credentials", {
       username,
       password,
@@ -17,7 +16,7 @@ const password = (formData.get("password") as string)?.trim();
     });
 
     if (res?.ok) {
-      window.location.href = "/post";
+      window.location.href = "/admin";
     } else {
       alert("Login failed");
     }

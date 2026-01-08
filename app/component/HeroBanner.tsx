@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export default function HeroBanner() {
   return (
@@ -9,9 +8,7 @@ export default function HeroBanner() {
   sm:h-[200px]
   md:h-[240px]
   lg:h-[280px]"
-      >
-        
-      </div>
+      ></div>
     </section>
   );
 }

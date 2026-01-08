@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import LoginButton from "./LoginButton";
+import { MenuItem } from "../lib/common";
 
 const MobileCategory = dynamic(() => import("./MobileCategory"), {
   ssr: false,
@@ -18,7 +19,11 @@ const categories = [
   "Thông báo",
 ];
 
-export default function HeaderNavbar() {
+export default function HeaderNavbar({
+  menu,
+}: {
+  menu: MenuItem[];
+}){
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState("");
 
@@ -59,17 +64,17 @@ export default function HeaderNavbar() {
                 🏠
               </Link>
 
-              {categories.map((m) => (
+              {menu.map((m, idx) => (
                 <li
-                  key={m}
+                  key={idx}
                   className="relative cursor-pointer"
-                  onMouseEnter={() => setOpenCat(m)}
+                  onMouseEnter={() => setOpenCat(m.href)}
                 >
-                  <Link href="/gioi-thieu" className="hover:text-red-600">
-                    {m}
+                  <Link href={m.href} className="hover:text-red-600">
+                    {m.label}
                   </Link>
 
-                  {openCat === m && (
+                  {openCat === m.href && (
                     <div className="absolute top-full left-0 pt-3 min-w-[180px] shadow-lg bg-white">
                       {["Category 1", "Category 2"].map((c) => (
                         <a

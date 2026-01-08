@@ -13,22 +13,13 @@ function htmlToText(html: string) {
 }
 
 export function processHtmlContent(rawHtml: string) {
-  const cleanHtml = DOMPurify.sanitize(rawHtml, {
-    ALLOWED_TAGS: [
-      "p", "b", "i", "strong", "em",
-      "ul", "ol", "li",
-      "h1", "h2", "h3",
-      "a", "img", "blockquote"
-    ],
-    ALLOWED_ATTR: ["href", "src", "alt"],
-  });
-
-  const text = htmlToText(cleanHtml);
+  const cleanHtmlContent = DOMPurify.sanitize(rawHtml, { USE_PROFILES: { html: true } });
+  const text = htmlToText(cleanHtmlContent);
 
   return {
-    contentHtml: cleanHtml,
+    contentHtml: cleanHtmlContent,
     contentText: text,
-    excerpt: text.slice(0, 160),
+    excerpt: text.slice(0, 160)
   };
 }
 
@@ -39,4 +30,8 @@ export function slugify(input: string): string {
     .replace(/[\u0300-\u036f]/g, "") // bỏ dấu tiếng Việt
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
+}
+
+export function getErrorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
 }

@@ -1,27 +1,32 @@
-import "@/app/(public)/globals.css";
+import "@/app/globals.css";
 
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "./component/ScrollToTop";
 import DarkModeToggle from "./component/DarkModeToggle";
 import Footer from "./component/Footer";
 import HeaderNavbar from "./component/HeaderNavbar";
-import { SessionProvider } from "next-auth/react";
 import AuthProvider from "./providers/AuthProvider";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./lib/auth";
+import { filterMenuByRole, MENU } from "./lib/common";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+const menu = filterMenuByRole(
+    MENU,
+    session?.user?.role
+  );
   return (
     <html lang="vi" suppressHydrationWarning>
       <body>
-        <AuthProvider>
+        <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {/* <Header /> */}
-            {/* <Navbar /> */}
-            <HeaderNavbar />
-            <main className="max-w-[1200px] mx-auto px-4">{children}</main>
+            <HeaderNavbar menu={menu}/>
+            {children}
             <ScrollToTop />
             <DarkModeToggle />
             <Footer />

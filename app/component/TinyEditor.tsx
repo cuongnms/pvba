@@ -3,7 +3,8 @@
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
 import { ArticleCategory } from "../types/model";
-
+import { Editor as TinyMCEInstance } from "tinymce";
+import { useSession } from "next-auth/react";
 const CATEGORY_OPTIONS: {
   value: ArticleCategory;
   label: string;
@@ -15,21 +16,41 @@ const CATEGORY_OPTIONS: {
   { value: "THONG_BAO", label: "Thông báo" },
 ];
 export default function TinyEditor() {
-  const editorRef = useRef<any>(null);
+    const { data: session, status } = useSession();
+
+  const editorRef = useRef<TinyMCEInstance | null>(null);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState<ArticleCategory | "">("");
+  const [summary, setSummary] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (!editorRef.current) return;
     const content = editorRef.current?.getContent();
+    const slug = title.toLowerCase().replace(/\s+/g, "-");
 
-    const payload = {
+    const article = {
       title,
+      slug,
+      summary,
       category,
-      content,
+      htmlContent: content,
+      thumbnail,
+      authorName: session?.user?.name,
     };
 
-    console.log("Submit data:", payload);
-    // TODO: POST lên API / lưu MongoDB
+    const res = await fetch("/api/article", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(article),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert("Article created with ID: " + data.articleId);
+    } else {
+      alert("Error: " + data.error);
+    }
   };
   return (
     <div className="space-y-4">
