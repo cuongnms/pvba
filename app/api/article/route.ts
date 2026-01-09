@@ -1,6 +1,6 @@
 import { createArticle } from "@/app/services/article";
 import { NextRequest, NextResponse } from "next/server";
-import { getErrorMessage, processHtmlContent } from "@/app/helper/helper";
+import { getErrorMessage, processHtmlContent, slugify } from "@/app/helper/helper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
@@ -41,10 +41,10 @@ export async function POST(req: NextRequest) {
       );
     }
     const { contentHtml, contentText, excerpt} = processHtmlContent(htmlContent);
-
+    const slugifyContent = slugify(slug);
     const newArticle = {
       title,
-      slug,
+      slug: slugifyContent,
       summary: excerpt,
       category,
       htmlContent: contentHtml,

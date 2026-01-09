@@ -22,7 +22,7 @@ const menu = filterMenuByRole(
   );
   return (
     <html lang="vi" suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <HeaderNavbar menu={menu}/>

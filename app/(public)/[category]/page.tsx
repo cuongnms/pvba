@@ -1,15 +1,15 @@
 import FeatureList from "@/app/component/FeatureList";
+import { getLabelFromCategory } from "@/app/helper/helper";
 import { ArticleCategory } from "@/app/types/model";
 
 interface Props {
-  params: { category: ArticleCategory }; // dynamic segment
+  params: { category: string };
 }
 
-// ✅ Không unwrap bằng await params.category
 export default async function CategoryPage({ params }: Props) {
-   const path = `/${params.category}`; // build path từ params
-   console.log("path ", path);
+   const resolvedParams = await params;
+  const path = `${resolvedParams.category}` as ArticleCategory;
 
 
-  return <FeatureList category={"GIOI_THIEU"} label={""} />;
+  return <FeatureList category={path} label={getLabelFromCategory(path)} />;
 }

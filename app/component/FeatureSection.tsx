@@ -6,6 +6,9 @@ import { listArticles } from "../services/article";
 export default async function FeatureSection() {
   const articles = await listArticles({ limit: 8 });
 
+  if(!articles || articles.length===0) {
+    return <></>
+  }
   return (
     <section className="mt-[2%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
       <div className="lg:col-span-2">

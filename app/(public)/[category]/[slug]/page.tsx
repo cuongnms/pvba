@@ -15,6 +15,8 @@ export default async function ArticleDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const article = await findArticleBySlug((await params).slug);
+  console.log(article);
+  console.log((await params).slug);
   return (
     <article className="max-w-4xl mx-auto py-10">
       {/* Title */}

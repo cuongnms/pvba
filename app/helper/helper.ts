@@ -38,26 +38,12 @@ export function getErrorMessage(err: unknown): string {
 }
 
 export const CATEGORY_LABEL: Record<ArticleCategory, string> = {
-  GIOI_THIEU: "GIỚI THIỆU",
-  TIN_TUC_SU_KIEN: "TIN TỨC SỰ KIỆN",
-  HOAT_DONG: "HOẠT ĐỘNG",
-  VAN_HOA: "VĂN HÓA",
-  THONG_BAO: "THÔNG BÁO",
+  "gioi-thieu": "GIỚI THIỆU",
+  "tin-tuc-su-kien": "TIN TỨC SỰ KIỆN",
+  "hoat-dong": "HOẠT ĐỘNG",
+  "van-hoa": "VĂN HÓA",
+  "thong-bao": "THÔNG BÁO",
 };
-
-// Slug trong URL → category enum
-export const SLUG_TO_CATEGORY: Record<string, ArticleCategory> = {
-  "gioi-thieu": "GIOI_THIEU",
-  "tin-tuc": "TIN_TUC_SU_KIEN",
-  "hoat-dong": "HOAT_DONG",
-  "van-hoa": "VAN_HOA",
-  "thong-bao": "THONG_BAO",
-};
-
-// Tạo hàm type-safe
-export function getCategoryFromSlug(slug: string): ArticleCategory | undefined {
-  return SLUG_TO_CATEGORY[slug];
-}
 
 export function getLabelFromCategory(category: ArticleCategory): string {
   return CATEGORY_LABEL[category];

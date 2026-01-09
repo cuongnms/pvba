@@ -25,7 +25,7 @@ if (!admin) {
     role: "ADMIN",
     createdAt: new Date(),
   });
-  print("✅ Default admin user created");
+  print("Default admin user created");
 } else {
-  print("ℹ️ Admin user already exists");
+  print("Admin user already exists");
 }

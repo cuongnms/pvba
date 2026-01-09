@@ -9,14 +9,14 @@ const CATEGORY_OPTIONS: {
   value: ArticleCategory;
   label: string;
 }[] = [
-  { value: "GIOI_THIEU", label: "Giới thiệu" },
-  { value: "TIN_TUC_SU_KIEN", label: "Tin tức & Sự kiện" },
-  { value: "HOAT_DONG", label: "Hoạt động" },
-  { value: "VAN_HOA", label: "Văn hóa" },
-  { value: "THONG_BAO", label: "Thông báo" },
+  { value: "gioi-thieu", label: "Giới thiệu" },
+  { value: "tin-tuc-su-kien", label: "Tin tức & Sự kiện" },
+  { value: "hoat-dong", label: "Hoạt động" },
+  { value: "van-hoa", label: "Văn hóa" },
+  { value: "thong-bao", label: "Thông báo" },
 ];
 export default function TinyEditor() {
-    const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
   const editorRef = useRef<TinyMCEInstance | null>(null);
   const [title, setTitle] = useState("");
@@ -97,13 +97,27 @@ export default function TinyEditor() {
             "advlist autolink lists link image charmap preview anchor " +
             "searchreplace visualblocks code fullscreen " +
             "insertdatetime media table help wordcount",
-
           toolbar:
             "undo redo | blocks | " +
             "bold italic underline | forecolor backcolor | " +
             "alignleft aligncenter alignright alignjustify | " +
             "bullist numlist outdent indent | " +
             "link image table | code",
+          images_upload_url: "/api/upload",
+          automatic_uploads: true,
+          images_reuse_filename: false,
+          // images_upload_handler: async (blobInfo) => {
+          //   const formData = new FormData();
+          //   formData.append("file", blobInfo.blob(), blobInfo.filename());
+
+          //   const res = await fetch("/api/upload", {
+          //     method: "POST",
+          //     body: formData,
+          //   });
+
+          //   const data = await res.json();
+          //   return data.location;
+          // },
         }}
       />
       <button

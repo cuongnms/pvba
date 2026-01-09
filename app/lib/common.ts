@@ -3,18 +3,13 @@ import { UserRole } from "@/app/types/model";
 export type MenuItem = {
   label: string;
   href: string;
-  roles?: UserRole[]; // undefined = public
+  roles?: UserRole[];
 };
 
-// "Giới thiệu",
-//   "Tin tức",
-//   "Hoạt động",
-//   "Văn hóa",
-//   "Thông báo",
 
 export const MENU: MenuItem[] = [
   { label: "Giới thiệu", href: "/gioi-thieu" },
-  { label: "Tin tức", href: "/tin-tuc" },
+  { label: "Tin tức - Sự kiện", href: "/tin-tuc-su-kien" },
   { label: "Hoạt động", href: "/hoat-dong" },
   { label: "Văn hóa", href: "/van-hoa" },
   { label: "Thông báo", href: "/thong-bao" },

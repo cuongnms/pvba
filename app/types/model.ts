@@ -2,11 +2,11 @@
 import { ObjectId } from "mongodb";
 
 export type ArticleCategory =
-  | "GIOI_THIEU"
-  | "TIN_TUC_SU_KIEN"
-  | "HOAT_DONG"
-  | "VAN_HOA"
-  | "THONG_BAO";
+  | "gioi-thieu"
+  | "tin-tuc-su-kien"
+  | "hoat-dong"
+  | "van-hoa"
+  | "thong-bao";
   
 
 export type UserRole = "ADMIN" | "EDITOR" | "USER";

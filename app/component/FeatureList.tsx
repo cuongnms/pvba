@@ -14,7 +14,7 @@ export default async function FeatureList({category, label}: {category?: Article
       </div>
       <div className="md:grid md:grid-cols-3">
         <div className="col-span-2">
-          {articles.slice().map((a, idx) => (
+          {articles?.slice().map((a, idx) => (
             <ArticleCard
               key={idx}
               article={a}

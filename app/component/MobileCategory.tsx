@@ -13,9 +13,9 @@ export default function MobileCategoryDrawer({
   open: boolean;
   onClose: () => void;
 }) {
-  const [active, setActive] = useState<string | null>("Kinh doanh");
+  // const [active, setActive] = useState<string | null>("Kinh doanh");
 
-  const toggle = (key: string) => setActive(active === key ? null : key);
+  // const toggle = (key: string) => setActive(active === key ? null : key);
 
   return (
     <div

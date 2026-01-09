@@ -21,7 +21,7 @@ export async function createArticle(
   return result.insertedId;
 }
 
-export async function findArticleBySlug(slug: string) {
+export async function findArticleBySlug(slug: string):Promise<Article | null> {
   const articles = await getArticlesCollection();
   const doc = await articles.findOne({ slug });
   if (!doc) return null;
@@ -45,26 +45,38 @@ export async function listArticles({
   category?: Article["category"];
   limit?: number;
   skip?: number;
-}) {
-  const articles = await getArticlesCollection();
-  const filter: any = {};
-  if (category) filter.category = category;
+}): Promise<Article[] | null> {
+  try {
+    const articlesColl = await getArticlesCollection();
+    const filter: any = {};
+    if (category) filter.category = category;
 
-  return articles
-    .find(filter, {
-      projection: {
-        title: 1,
-        slug: 1,
-        summary: 1,
-        category: 1,
-        thumbnail: 1,
-        createdAt: 1,
-      },
-    })
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit)
-    .toArray();
+    const articles = await articlesColl
+      .find(filter, {
+        projection: {
+          _id: 0, // loại bỏ _id
+          title: 1,
+          slug: 1,
+          summary: 1,
+          category: 1,
+          thumbnail: 1,
+          createdAt: 1,
+          contentHtml: 1, // thêm nếu muốn trả về contentHtml
+        },
+      })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    if (!articles || articles.length === 0) return null;
+
+    return articles;
+  } catch (err) {
+    console.error("Error fetching articles:", err);
+    return null;
+  }
+
 }
 
 

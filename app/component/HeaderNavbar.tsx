@@ -11,12 +11,7 @@ const MobileCategory = dynamic(() => import("./MobileCategory"), {
   ssr: false,
 });
 
-
-export default function HeaderNavbar({
-  menu,
-}: {
-  menu: MenuItem[];
-}){
+export default function HeaderNavbar({ menu }: { menu: MenuItem[] }) {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState("");
 
@@ -54,7 +49,7 @@ export default function HeaderNavbar({
               onMouseLeave={() => setOpenCat("")}
             >
               <Link href="/" className="inline-flex items-center w-[2%]">
-                🏠
+                <Image src="/img/home.svg" alt="Logo" width={120} height={40} />
               </Link>
 
               {menu.map((m, idx) => (
@@ -63,7 +58,7 @@ export default function HeaderNavbar({
                   className="relative cursor-pointer"
                   onMouseEnter={() => setOpenCat(m.href)}
                 >
-                  <Link href={m.href} onClick={() => console.log("click ", m.href)}className="hover:text-red-600">
+                  <Link href={m.href} className="hover:text-red-600">
                     {m.label}
                   </Link>
                 </li>
@@ -89,7 +84,11 @@ export default function HeaderNavbar({
             </button>
           </div>
 
-          <MobileCategory menu={menu} open={open} onClose={() => setOpen(false)} />
+          <MobileCategory
+            menu={menu}
+            open={open}
+            onClose={() => setOpen(false)}
+          />
         </div>
       </div>
     </>
