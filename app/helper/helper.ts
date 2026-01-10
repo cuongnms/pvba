@@ -40,8 +40,8 @@ export function getErrorMessage(err: unknown): string {
 export const CATEGORY_LABEL: Record<ArticleCategory, string> = {
   "gioi-thieu": "GIỚI THIỆU",
   "tin-tuc-su-kien": "TIN TỨC SỰ KIỆN",
-  "hoat-dong": "HOẠT ĐỘNG",
-  "van-hoa": "VĂN HÓA",
+  "thong-tin": "THÔNG TIN",
+  "thu-vien": "THƯ VIỆN",
   "thong-bao": "THÔNG BÁO",
 };
 

@@ -4,8 +4,8 @@ import { ObjectId } from "mongodb";
 export type ArticleCategory =
   | "gioi-thieu"
   | "tin-tuc-su-kien"
-  | "hoat-dong"
-  | "van-hoa"
+  | "thong-tin"
+  | "thu-vien"
   | "thong-bao";
   
 

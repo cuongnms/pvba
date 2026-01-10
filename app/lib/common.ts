@@ -13,6 +13,7 @@ export const MENU: MenuItem[] = [
   { label: "Hoạt động", href: "/hoat-dong" },
   { label: "Văn hóa", href: "/van-hoa" },
   { label: "Thông báo", href: "/thong-bao" },
+  { label: "Tra cứu", href: "/tra-cuu", roles: ["ADMIN", "EDITOR", "USER"]},
   { label: "Quản lý user", href: "/admin/user", roles: ["ADMIN"] },
   { label: "Quản lý bài viết", href: "/admin/bai-viet", roles: ["ADMIN", "EDITOR"] },
 ];

@@ -1,14 +1,15 @@
 import { ArticleCategory, UserRole } from "./model";
 
 export enum ArticleSize {
-  SMALL,
-  MED,
-  LARGE,
+  XL = "XL",
+  LARGE = "LARGE",
+  MEDIUM = "MEDIUM",
+  SMALL = "SMALL",
 }
 
 export enum ArticleFormat {
-  GRID,
-  LIST,
+  GRID = "GRID",
+  LIST = "LIST",
 }
 
 export type LoginState = {

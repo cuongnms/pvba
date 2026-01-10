@@ -72,7 +72,7 @@ export default function HeaderNavbar({ menu }: { menu: MenuItem[] }) {
         {/* MOBILE */}
         <div className="sm:hidden border-b bg-white text-black ">
           <div className="px-4 h-12 flex items-center">
-            <Image src="/img/logo.jpg" alt="logo" width={140} height={36} />
+            <Image src="/img/logo.jpg" alt="logo" width={100} height={36} />
             <div className="flex-1" />
             <LoginButton />
             <button

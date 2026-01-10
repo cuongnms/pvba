@@ -4,6 +4,8 @@ import fs from "fs/promises";
 import path from "path";
 import crypto from "crypto";
 
+const UPLOAD_DIR = "/app/data/image";
+
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
   const file = formData.get("file") as File;
@@ -17,19 +19,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
   }
 
-  // ✅ Generate safe filename
+  if (file.size > 5 * 1024 * 1024) {
+  return NextResponse.json({ error: "File too large" }, { status: 400 });
+}
+
   const ext = file.name.split(".").pop();
   const filename = `${crypto.randomUUID()}.${ext}`;
 
-  // ✅ Path trong container
-  const uploadDir = path.join(process.cwd(), "data/image");
-  console.log("upload dir: ", uploadDir);
-  await fs.mkdir(uploadDir, { recursive: true });
+  
+  await fs.mkdir(UPLOAD_DIR, { recursive: true });
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(path.join(uploadDir, filename), buffer);
+  await fs.writeFile(path.join(UPLOAD_DIR, filename), buffer);
 
-  // ✅ Trả URL để lưu DB
   return NextResponse.json({
     location: `/api/image/${filename}`,
   });

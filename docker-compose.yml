@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - /data/image:/app/data/image
+      - web_uploads:/app/data/image
     depends_on:
       - db
     ports:
@@ -33,3 +33,5 @@ services:
 
 volumes:
   mongo_data:
+  web_uploads:
+

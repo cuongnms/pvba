@@ -11,8 +11,8 @@ const CATEGORY_OPTIONS: {
 }[] = [
   { value: "gioi-thieu", label: "Giới thiệu" },
   { value: "tin-tuc-su-kien", label: "Tin tức & Sự kiện" },
-  { value: "hoat-dong", label: "Hoạt động" },
-  { value: "van-hoa", label: "Văn hóa" },
+  { value: "thong-tin", label: "Thông tin" },
+  { value: "thu-vien", label: "Thư viện" },
   { value: "thong-bao", label: "Thông báo" },
 ];
 export default function TinyEditor() {
@@ -23,6 +23,28 @@ export default function TinyEditor() {
   const [category, setCategory] = useState<ArticleCategory | "">("");
   const [summary, setSummary] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const [uploadingThumb, setUploadingThumb] = useState(false);
+
+  // 🔥 Upload thumbnail
+  const handleThumbnailUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setUploadingThumb(true);
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    setUploadingThumb(false);
+
+    const data = await res.json();
+    if (data.location) {
+      console.log("Thumbnail uploaded to: ", data.location);
+      setThumbnail(data.location);
+    } else {
+      alert("Upload thumbnail failed");
+    }
+  };
 
   const handleSubmit = async () => {
     if (!editorRef.current) return;
@@ -81,6 +103,42 @@ export default function TinyEditor() {
             </option>
           ))}
         </select>
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium">Thumbnail</label>
+
+        {thumbnail && (
+          <img
+            src={thumbnail}
+            alt="thumbnail"
+            className="w-64 h-40 object-cover rounded border mb-2"
+          />
+        )}
+
+        <label
+          htmlFor="thumbnail-upload"
+          className="inline-block px-4 py-1 border rounded cursor-pointer hover:bg-gray-100"
+        >
+          Choose file
+        </label>
+
+        <input
+          id="thumbnail-upload"
+          type="file"
+          accept="image/*"
+          className="hidden"
+          disabled={uploadingThumb}
+          onChange={(e) => {
+            if (e.target.files?.[0]) {
+              handleThumbnailUpload(e.target.files[0]);
+            }
+          }}
+        />
+
+        {uploadingThumb && (
+          <p className="text-sm text-gray-500">Uploading thumbnail...</p>
+        )}
       </div>
       <Editor
         tinymceScriptSrc="/tinymce/tinymce.min.js"
