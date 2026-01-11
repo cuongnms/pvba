@@ -15,80 +15,38 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Main article */}
             <div className="lg:col-span-2 space-y-3">
-              <Image
-                src="/img/news/new-1.jpg"
-                alt="hero"
-                width={900}
-                height={500}
-                className="rounded-xl object-cover"
+              <ArticleCard
+                style="style1"
+                title="Tin nổi bật"
+                summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
+                image="/img/news/new-1.jpg"
               />
-              <h3 className="text-xl font-semibold">
-                Thứ trưởng Phạm Hoài Nam: “Viettel hãy phấn đấu để có nhiều anh
-                hùng hơn nữa”
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Thứ trưởng Bộ Quốc phòng Phạm Hoài Nam khích lệ cán bộ nhân viên
-                Viettel...
-              </p>
             </div>
 
-            {/* Side list */}
-            {/* <div className="space-y-4 lg:col-span-2">
-              <div className="grid grid-cols-2 grid-rows-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <ArticleCard
-                    key={i}
-                    title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                    source="Viettel Group"
-                    image="/img/news/new-1.jpg"
-                    imageWidth={400}
-                    imageHeight={300}
-                  />
-                ))}
-              </div>
-            </div> */}
             <div className="lg:col-span-2">
-              {/* Mobile: list | Desktop: grid 2x2 */}
-              <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:grid-rows-2">
+              <div className="flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:grid-rows-2">
                 {[1, 2, 3, 4].map((i) => (
                   <ArticleCard
                     key={i}
-                    variant="horizontal" // ⭐ mobile list
-                    title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                    source="Viettel Group"
+                    style="style1"
+                    title="Tin nổi bật"
+                    summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
                     image="/img/news/new-1.jpg"
-                    imageWidth={120}
-                    imageHeight={80}
-                    // className="lg:[&>*]:block"    // nếu ArticleCard hỗ trợ className
                   />
                 ))}
               </div>
             </div>
           </div>
-          {/* <div className="pt-6 flex">
+
+          <div className="w-full pt-8 flex flex-col md:flex-row gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <ArticleCard
-                key={i}
-                variant="horizontal"
-                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                source="Viettel Group"
-                image="/img/news/new-1.jpg"
-                imageWidth={80}
-                imageHeight={80}
-              />
-            ))}
-          </div> */}
-          <div className="pt-6 flex flex-col gap-4 lg:flex-row">
-            {[1, 2, 3, 4].map((i) => (
-              <ArticleCard
-                key={i}
-                variant="horizontal"
-                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                source="Viettel Group"
-                image="/img/news/new-1.jpg"
-                imageWidth={80}
-                imageHeight={80}
-              />
+              <div key={i} className="flex-1">
+                <ArticleCard
+                  style="style3"
+                  title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025 "
+                  image="/img/news/new-1.jpg"
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -98,61 +56,51 @@ export default function HomePage() {
 
       {/* TIN TỨC - SỰ KIỆN */}
       <section>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="lg:col-span-1 pr-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-6">
+          <div className="md:col-span-1 lg:pr-6">
             <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
               Tin tức
             </h2>
             <div className="space-y-3">
               <ArticleCard
-                key={0}
-                variant="horizontal"
-                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                source="Viettel Group"
+                style="style1"
+                title="Tin nổi bật"
+                summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
                 image="/img/news/new-1.jpg"
-                imageWidth={300}
-                imageHeight={80}
               />
             </div>
-            <div className="flex pt-6 gap-3">
+            <div className="flex max-sm:flex-col pt-6 gap-6 max-sm:pb-6">
               {[1, 2, 3].map((i) => (
                 <ArticleCard
-                  key={i}
-                  // variant="horizontal"
-                  title="Viettel Commerce cán mốc doanh thu cao nhất"
-                  source="Viettel Commerce"
+                  style="style2"
+                  title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025 "
                   image="/img/news/new-1.jpg"
-                  imageWidth={180}
-                  imageHeight={20}
+                  textPosition="bottom"
                 />
               ))}
             </div>
           </div>
-          <div className="lg:col-span-1 pl-6">
+          <div className="md:col-span-1 lg:pl-6">
             <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
               Sự kiện
             </h2>
             <div className="space-y-3">
               <ArticleCard
-                key={0}
-                variant="horizontal"
-                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                source="Viettel Group"
+                style="style1"
+                title="Tin nổi bật"
+                summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
                 image="/img/news/new-1.jpg"
-                imageWidth={300}
-                imageHeight={80}
               />
             </div>
-            <div className="flex pt-6 gap-3">
+            <div className="flex max-sm:flex-col pt-6 gap-6 max-sm:pb-6">
               {[1, 2, 3].map((i) => (
                 <ArticleCard
                   key={i}
-                  // variant="horizontal"
+                  style="style2"
                   title="Viettel Commerce cán mốc doanh thu cao nhất"
-                  source="Viettel Commerce"
                   image="/img/news/new-1.jpg"
-                  imageWidth={200}
-                  imageHeight={30}
+                                    textPosition="bottom"
+
                 />
               ))}
             </div>
@@ -173,7 +121,7 @@ export default function HomePage() {
             <h2 className="lg:col-span-2 text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
               Hoạt động
             </h2>
-            <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
+            <h2 className="max-sm:hidden text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
               Hội viên
             </h2>
           </div>
@@ -183,23 +131,21 @@ export default function HomePage() {
             <div className="lg:col-span-2">
               <ArticleCard
                 key={0}
-                variant="horizontal"
                 title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
                 source="Viettel Group"
                 image="/img/news/new-1.jpg"
-                imageWidth={400}
-                imageHeight={300}
+                style="style2"
+                textPosition="bottom"
               />
               <div className="flex flex-col gap-6 pt-6">
                 {[1, 2, 3].map((i) => (
                   <ArticleCard
                     key={i}
-                    variant="horizontal"
                     title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
                     source="Viettel Group"
                     image="/img/news/new-1.jpg"
-                    imageWidth={300}
-                    imageHeight={300}
+                    style="style2"
+                    textPosition="right"
                   />
                 ))}
               </div>
@@ -207,6 +153,9 @@ export default function HomePage() {
 
             {/* Side list */}
             <div className="flex flex-col">
+              <h2 className="md:hidden text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
+              Hội viên
+            </h2>
               <MemberList />
             </div>
           </div>
