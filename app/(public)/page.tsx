@@ -4,6 +4,8 @@ import FeaturedSwiper from "../component/FeatureSwiper";
 
 import Image from "next/image";
 import ArticleCard from "../component/ArticleCard";
+import VideoSwiper from "../component/VideoSwiper";
+import MemberList from "../component/MemberList";
 export default function HomePage() {
   return (
     <main className="container mx-auto px-4 py-6 space-y-12">
@@ -31,7 +33,7 @@ export default function HomePage() {
             </div>
 
             {/* Side list */}
-            <div className="space-y-4 lg:col-span-2">
+            {/* <div className="space-y-4 lg:col-span-2">
               <div className="grid grid-cols-2 grid-rows-2 gap-4">
                 {[1, 2, 3, 4].map((i) => (
                   <ArticleCard
@@ -44,9 +46,39 @@ export default function HomePage() {
                   />
                 ))}
               </div>
+            </div> */}
+            <div className="lg:col-span-2">
+              {/* Mobile: list | Desktop: grid 2x2 */}
+              <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:grid-rows-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <ArticleCard
+                    key={i}
+                    variant="horizontal" // ⭐ mobile list
+                    title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
+                    source="Viettel Group"
+                    image="/img/news/new-1.jpg"
+                    imageWidth={120}
+                    imageHeight={80}
+                    // className="lg:[&>*]:block"    // nếu ArticleCard hỗ trợ className
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="pt-6 flex">
+          {/* <div className="pt-6 flex">
+            {[1, 2, 3, 4].map((i) => (
+              <ArticleCard
+                key={i}
+                variant="horizontal"
+                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
+                source="Viettel Group"
+                image="/img/news/new-1.jpg"
+                imageWidth={80}
+                imageHeight={80}
+              />
+            ))}
+          </div> */}
+          <div className="pt-6 flex flex-col gap-4 lg:flex-row">
             {[1, 2, 3, 4].map((i) => (
               <ArticleCard
                 key={i}
@@ -127,13 +159,25 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* CÔNG NGHỆ */}
       <section>
         <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
-          Hoạt động
+          Thư viện
         </h2>
+
+        <VideoSwiper />
+      </section>
+      {/* CÔNG NGHỆ */}
+      <section>
         <div className="flex flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
+            <h2 className="lg:col-span-2 text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
+              Hoạt động
+            </h2>
+            <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
+              Hội viên
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main article */}
             <div className="lg:col-span-2">
@@ -162,7 +206,9 @@ export default function HomePage() {
             </div>
 
             {/* Side list */}
-            <div className="flex flex-col"></div>
+            <div className="flex flex-col">
+              <MemberList />
+            </div>
           </div>
         </div>
       </section>
