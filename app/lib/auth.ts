@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
         }
         const user = await findUserByUsername(credentials.username);
         if (!user) {
+          console.log("no user found");
           return null;
         }
         const ok = await bcrypt.compare(credentials.password, user.password);

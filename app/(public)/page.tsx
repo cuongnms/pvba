@@ -72,6 +72,7 @@ export default function HomePage() {
             <div className="flex max-sm:flex-col pt-6 gap-6 max-sm:pb-6">
               {[1, 2, 3].map((i) => (
                 <ArticleCard
+                  key={i}
                   style="style2"
                   title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025 "
                   image="/img/news/new-1.jpg"

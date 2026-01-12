@@ -1,19 +1,19 @@
 version: "3.9"
 
 services:
-  db:
-    image: mongo:6.0
-    container_name: pvba-db
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: pvba-nginx
     ports:
-      - "27017:27017"
+      - "80:80"
+      # - "443:443"   # bật khi có SSL
     volumes:
-      - mongo_data:/data/db
-      - ./mongo-init:/docker-entrypoint-initdb.d
-
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping')"]
-      interval: 5s
-      retries: 5
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+    networks:
+      - public_net
+      - private_net
 
   web:
     image: pvba-web:latest
@@ -24,12 +24,42 @@ services:
     volumes:
       - web_uploads:/app/data/image
     depends_on:
-      - db
-    ports:
-      - "3000:3000"
+      db:
+        condition: service_healthy
+    expose:
+      - "3000"
+    networks:
+      - private_net
     environment:
       NODE_ENV: production
-      MONGODB_URI: mongodb://db:27017/pvba
+      MONGODB_URI: mongodb://pvba:helloworld123@db:27017/pvba?authSource=admin
+      NEXTAUTH_SECRET: Helloworld12!@
+      NEXTAUTH_URL: http://localhost
+
+  db:
+    image: mongo:6.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pvba
+      MONGO_INITDB_ROOT_PASSWORD: helloworld123
+      MONGO_INITDB_DATABASE: pvba
+    container_name: pvba-db
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping')"]
+      interval: 5s
+      retries: 5
+    networks:
+      - private_net
+
+networks:
+  public_net:
+    driver: bridge
+  private_net:
+    driver: bridge
+    internal: true  
 
 volumes:
   mongo_data:

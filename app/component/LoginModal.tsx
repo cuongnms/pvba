@@ -14,7 +14,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       password,
       redirect: false,
     });
-
+    console.log("login resp: ",res);
     if (res?.ok) {
       window.location.href = "/admin";
     } else {
