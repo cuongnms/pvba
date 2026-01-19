@@ -6,14 +6,27 @@ services:
     container_name: pvba-nginx
     ports:
       - "80:80"
-      # - "443:443"   # bật khi có SSL
+      - "443:443"   # bật khi có SSL
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - web
     networks:
       - public_net
       - private_net
+
+  certbot:
+    image: certbot/certbot
+    container_name: pvba-certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: ""
+    networks:
+      - public_net
 
   web:
     image: pvba-web:latest
@@ -34,7 +47,7 @@ services:
       NODE_ENV: production
       MONGODB_URI: mongodb://pvba:helloworld123@db:27017/pvba?authSource=admin
       NEXTAUTH_SECRET: Helloworld12!@
-      NEXTAUTH_URL: http://localhost
+      NEXTAUTH_URL: https://pvba.vn
 
   db:
     image: mongo:6.0
