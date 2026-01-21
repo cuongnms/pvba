@@ -52,3 +52,8 @@ export type ArticleUpdateInput = {
   textContent?: string;
   thumbnail?: string;
 };
+
+export type ArticlesByCategory = {
+  category: Article["category"];
+  articles: Article[];
+};

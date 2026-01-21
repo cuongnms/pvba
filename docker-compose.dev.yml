@@ -1,14 +1,54 @@
 version: "3.9"
 
 services:
+  web:
+    image: pvba-web:latest
+    container_name: pvba-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - web_uploads:/app/data/image
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - private_net
+      - public_net
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: mongodb://pvba:helloworld123@db:27017/pvba?authSource=admin
+      NEXTAUTH_SECRET: Helloworld12!@
+      NEXTAUTH_URL: http://localhost:3000
+
   db:
     image: mongo:6.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pvba
+      MONGO_INITDB_ROOT_PASSWORD: helloworld123
+      MONGO_INITDB_DATABASE: pvba
     container_name: pvba-db
-    ports:
-      - "27017:27017"
     volumes:
       - mongo_data:/data/db
-    restart: unless-stopped
+      - ./mongo-init:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping')"]
+      interval: 5s
+      retries: 5
+    networks:
+      - private_net
+
+networks:
+  public_net:
+    driver: bridge
+  private_net:
+    driver: bridge
+    internal: true  
 
 volumes:
   mongo_data:
+  web_uploads:
+

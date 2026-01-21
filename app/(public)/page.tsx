@@ -2,7 +2,6 @@
 // "use client";
 import FeaturedSwiper from "../component/FeatureSwiper";
 
-import Image from "next/image";
 import ArticleCard from "../component/ArticleCard";
 import VideoSwiper from "../component/VideoSwiper";
 import MemberList from "../component/MemberList";
@@ -100,8 +99,7 @@ export default function HomePage() {
                   style="style2"
                   title="Viettel Commerce cán mốc doanh thu cao nhất"
                   image="/img/news/new-1.jpg"
-                                    textPosition="bottom"
-
+                  textPosition="bottom"
                 />
               ))}
             </div>
@@ -155,8 +153,8 @@ export default function HomePage() {
             {/* Side list */}
             <div className="flex flex-col">
               <h2 className="md:hidden text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
-              Hội viên
-            </h2>
+                Hội viên
+              </h2>
               <MemberList />
             </div>
           </div>

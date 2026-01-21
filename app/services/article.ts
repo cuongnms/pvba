@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-import { Article, ArticleUpdateInput } from "../types/model";
+import { Article, ArticlesByCategory, ArticleUpdateInput } from "../types/model";
 import clientPromise from "../lib/mongodb";
 
 async function getArticlesCollection() {
@@ -100,3 +100,47 @@ export async function updateArticle(slug: string, data: ArticleUpdateInput) {
     }
   );
 }
+
+export async function listArticlesByCategoryLimit({
+  limitPerCategory = 5,
+}: {
+  limitPerCategory?: number;
+}): Promise<
+ ArticlesByCategory[]
+> {
+  const articlesColl = await getArticlesCollection();
+
+  const result = await articlesColl
+    .aggregate<ArticlesByCategory>([
+      { $sort: { createdAt: -1 } },
+      {
+        $group: {
+          _id: "$category",
+          articles: {
+            $push: {
+              title: "$title",
+              slug: "$slug",
+              summary: "$summary",
+              category: "$category",
+              thumbnail: "$thumbnail",
+              authorName: "$authorName",
+              createdAt: "$createdAt",
+              contentHtml: "$contentHtml",
+            },
+          },
+        },
+      },
+
+      {
+        $project: {
+          _id: 0,
+          category: "$_id",
+          articles: { $slice: ["$articles", limitPerCategory] },
+        },
+      },
+    ])
+    .toArray();
+
+  return result;
+}
+

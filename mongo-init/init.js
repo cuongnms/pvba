@@ -21,7 +21,7 @@ if (!admin) {
     userId: "admin-uuid-1234",
     userName: "admin",
     email: "admin@example.com",
-    password: "$2b$10$YGVbPHJEwEXsQUcNiZk.6O9i2oPU4Ajc2nXJViYXAh0bWodQcMHL.",
+    password: "$2b$10$Po60eCrgRvItHb.glzJ/1esxcZEiGkH/LO8elnlO5G6F/XGQABxLO",
     role: "ADMIN",
     createdAt: new Date(),
   });
