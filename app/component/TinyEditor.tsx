@@ -11,9 +11,10 @@ const CATEGORY_OPTIONS: {
 }[] = [
   { value: "gioi-thieu", label: "Giới thiệu" },
   { value: "tin-tuc-su-kien", label: "Tin tức & Sự kiện" },
-  { value: "thong-tin", label: "Thông tin" },
-  { value: "thu-vien", label: "Thư viện" },
+  { value: "hoat-dong", label: "Hoạt động" },
+  { value: "thanh-vien", label: "Thành viên" },
   { value: "thong-bao", label: "Thông báo" },
+  { value: "thu-vien", label: "Thư viện" },
 ];
 export default function TinyEditor() {
   const { data: session, status } = useSession();
