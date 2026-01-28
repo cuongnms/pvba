@@ -19,7 +19,7 @@ export default function HeaderNavbar({ menu }: { menu: MenuItem[] }) {
     <>
       <div className="relative w-full aspect-[1500/205]">
         <Image
-          src="/img/banner-2026.png"
+          src="/img/banner-2026.jpg"
           alt="Chúc mừng năm mới 2026"
           fill
           priority

@@ -20,24 +20,30 @@ export default async function FeatureList({
           <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
             {label}
           </h2>
-          <div className="space-y-3">
-            <ArticleCard
-              style="big-news-right-text"
-              title="Tin nổi bật"
-              summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-              image="/img/news/new-1.jpg"
-            />
-          </div>
-          <div className="flex flex-col my-6 gap-6">
-            {[1, 2, 3].map((i) => (
-              <ArticleCard
-                key={i}
-                style="medium-news-right-text"
-                title="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025 "
-                image="/img/news/new-1.jpg"
-              />
-            ))}
-          </div>
+          {articles && articles.length > 0 ? (
+            <>
+              <div className="space-y-3">
+                <ArticleCard
+                  style="big-news-right-text"
+                  title={articles[0].title}
+                  summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
+                  image="/img/news/new-1.jpg"
+                />
+              </div>
+              <div className="flex flex-col my-6 gap-6">
+                {articles.slice(1).map((article, i) => (
+                  <ArticleCard
+                    key={i}
+                    style="medium-news-right-text"
+                    title={article.title}
+                    image={article.thumbnail}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <>Chưa có bài viết</>
+          )}
         </div>
         <div className="md:col-span-1">
           <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
