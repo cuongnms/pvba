@@ -1,8 +1,8 @@
 "use client";
 
 import { Editor } from "@tinymce/tinymce-react";
-import { useRef, useState } from "react";
-import { ArticleCategory } from "../types/model";
+import { useEffect, useRef, useState } from "react";
+import { Article, ArticleCategory, ArticleUpdateInput } from "../types/model";
 import { Editor as TinyMCEInstance } from "tinymce";
 import { useSession } from "next-auth/react";
 const CATEGORY_OPTIONS: {
@@ -16,17 +16,44 @@ const CATEGORY_OPTIONS: {
   { value: "thong-bao", label: "Thông báo" },
   { value: "thu-vien", label: "Thư viện" },
 ];
-export default function TinyEditor() {
-  const { data: session, status } = useSession();
 
+interface TinyEditorProps {
+  article?: Article; // optional: dùng cho create & edit
+}
+export default function TinyEditor({ article }: TinyEditorProps) {
+  const { data: session, status } = useSession();
   const editorRef = useRef<TinyMCEInstance | null>(null);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState<ArticleCategory | "">("");
   const [summary, setSummary] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [uploadingThumb, setUploadingThumb] = useState(false);
+  const [editorReady, setEditorReady] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  useEffect(() => {
+    if (!article) return;
 
-  // 🔥 Upload thumbnail
+    setTitle(article.title ?? "");
+    setCategory(article.category ?? "");
+    setSummary(article.summary ?? "");
+    setThumbnail(article.thumbnail ?? "");
+    if (editorRef.current && article.htmlContent) {
+      editorRef.current.setContent(article.htmlContent);
+    } else {
+      console.log("editorRef.current:", editorRef.current);
+      console.log("article.htmlContent:", article.htmlContent);
+      console.log("Editor not ready yet");
+    }
+  }, [article]);
+
+  useEffect(() => {
+    if (!editorReady) return;
+    if (!article?.htmlContent) return;
+    if (!editorRef.current) return;
+
+    editorRef.current.setContent(article.htmlContent);
+  }, [editorReady, article?.htmlContent]);
+
   const handleThumbnailUpload = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -40,7 +67,6 @@ export default function TinyEditor() {
 
     const data = await res.json();
     if (data.location) {
-      console.log("Thumbnail uploaded to: ", data.location);
       setThumbnail(data.location);
     } else {
       alert("Upload thumbnail failed");
@@ -49,30 +75,57 @@ export default function TinyEditor() {
 
   const handleSubmit = async () => {
     if (!editorRef.current) return;
-    const content = editorRef.current?.getContent();
-    const slug = title.toLowerCase().replace(/\s+/g, "-");
 
-    const article = {
-      title,
-      slug,
-      summary,
-      category,
-      htmlContent: content,
-      thumbnail,
-      authorName: session?.user?.name,
-    };
+    if (article) {
+      const content = editorRef.current?.getContent();
 
-    const res = await fetch("/api/article", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(article),
-    });
+      const articleUpdate = {
+        title,
+        slug: article.slug,
+        summary,
+        category,
+        htmlContent: content,
+        thumbnail,
+      };
 
-    const data = await res.json();
-    if (data.success) {
-      alert("Article created with ID: " + data.articleId);
+      const res = await fetch("/api/article/" + article.slug, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(articleUpdate),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Article updated successfully");
+      } else {
+        alert("Error: " + data.error);
+      }
     } else {
-      alert("Error: " + data.error);
+      const content = editorRef.current?.getContent();
+      const slug = title.toLowerCase().replace(/\s+/g, "-");
+
+      const article = {
+        title,
+        slug,
+        summary,
+        category,
+        htmlContent: content,
+        thumbnail,
+        authorName: session?.user?.name,
+      };
+
+      const res = await fetch("/api/article", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(article),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Article created successfully");
+      } else {
+        alert("Error: " + data.error);
+      }
     }
   };
   return (
@@ -90,7 +143,7 @@ export default function TinyEditor() {
 
       {/* CATEGORY */}
       <div>
-        <label className="block mb-1 font-medium">Category</label>
+        <label className="block mb-1 font-medium">Danh mục</label>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value as ArticleCategory)}
@@ -107,7 +160,7 @@ export default function TinyEditor() {
       </div>
 
       <div>
-        <label className="block mb-1 font-medium">Thumbnail</label>
+        <label className="block mb-1 font-medium">Ảnh thumbnail</label>
 
         {thumbnail && (
           <img
@@ -147,6 +200,7 @@ export default function TinyEditor() {
         licenseKey="gpl"
         onInit={(_, editor) => {
           editorRef.current = editor;
+          setEditorReady(true);
         }}
         init={{
           height: 500,
@@ -162,28 +216,35 @@ export default function TinyEditor() {
             "alignleft aligncenter alignright alignjustify | " +
             "bullist numlist outdent indent | " +
             "link image table | code",
-          images_upload_url: "/api/upload",
+          // images_upload_url: "/api/upload",
+          images_upload_handler: async (blobInfo) => {
+            const formData = new FormData();
+            formData.append("file", blobInfo.blob(), blobInfo.filename());
+
+            const res = await fetch("/api/upload", {
+              method: "POST",
+              body: formData,
+            });
+
+            const data = await res.json();
+
+            if (!data.location) {
+              throw new Error("Upload image failed");
+            }
+
+            setUploadedImages((prev) => [...prev, data.location]);
+
+            return data.location;
+          },
           automatic_uploads: true,
           images_reuse_filename: false,
-          // images_upload_handler: async (blobInfo) => {
-          //   const formData = new FormData();
-          //   formData.append("file", blobInfo.blob(), blobInfo.filename());
-
-          //   const res = await fetch("/api/upload", {
-          //     method: "POST",
-          //     body: formData,
-          //   });
-
-          //   const data = await res.json();
-          //   return data.location;
-          // },
         }}
       />
       <button
         onClick={handleSubmit}
         className="px-4 py-2 bg-black text-white rounded"
       >
-        Save Post
+        Lưu bài viết
       </button>
     </div>
   );

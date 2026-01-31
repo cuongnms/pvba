@@ -1,20 +1,20 @@
-import { createArticle, listArticles } from "@/app/services/article";
+import { createArticle, listArticles, updateArticle } from "@/app/services/article";
 import { NextRequest, NextResponse } from "next/server";
 import { getErrorMessage, processHtmlContent, slugify } from "@/app/helper/helper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
-export async function GET() {
-  const session = await getServerSession(authOptions);
+// export async function GET() {
+//   const session = await getServerSession(authOptions);
 
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+//   if (!session) {
+//     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+//   }
 
-  const articles = await listArticles({});
-  console.log("articles:", articles);
-  return NextResponse.json(articles);
-}
+//   const articles = await listArticles({});
+//   console.log("articles:", articles);
+//   return NextResponse.json(articles);
+// }
 
 export async function POST(req: NextRequest) {
   try {
@@ -53,21 +53,18 @@ export async function POST(req: NextRequest) {
       );
     }
     const { contentHtml, contentText, excerpt} = processHtmlContent(htmlContent);
-    const slugifyContent = slugify(slug);
-    const newArticle = {
+    const articleUpdateData = {
       title,
-      slug: slugifyContent,
+      slug,
       summary: excerpt,
       category,
       htmlContent: contentHtml,
       textContent: contentText, 
       thumbnail,
       authorName,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     };
 
-    const result = await createArticle(newArticle);
+    const result = await updateArticle(slug, articleUpdateData);
 
     return NextResponse.json({ success: true, articleId: result });
   } catch (err: unknown) {

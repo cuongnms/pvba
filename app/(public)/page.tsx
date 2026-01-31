@@ -21,13 +21,13 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {/* Main article */}
               <div className="md:col-span-2 space-y-3">
-                <Link href={`/${news[0].category}/${news[0].articles[0].slug}`}>
+                <Link href={`/${articles[0].category}/${articles[0].articles[0].slug}`}>
                   <ArticleCard
                     style="hot-news"
-                    title={news[0].articles[0].title}
-                    source={news[0].articles[0].authorName}
-                    summary={news[0].articles[0].summary}
-                    image={news[0].articles[0].thumbnail}
+                    title={articles[0].articles[0].title}
+                    source={articles[0].articles[0].authorName}
+                    summary={articles[0].articles[0].summary}
+                    image={articles[0].articles[0].thumbnail || ""}
                   />
                 </Link>
               </div>
@@ -44,7 +44,7 @@ export default async function HomePage() {
                         style="big-news"
                         title={article.articles[index].title}
                         summary={article.articles[index].summary}
-                        image={article.articles[index].thumbnail}
+                        image={article.articles[index].thumbnail || ""}
                       />
                     </Link>
                   ))}
@@ -63,7 +63,7 @@ export default async function HomePage() {
                       style="small-news"
                       title={article.articles[index].title}
                       source={article.articles[index].authorName}
-                      image={article.articles[index].thumbnail}
+                      image={article.articles[index].thumbnail || ""}
                     />
                   </Link>
                 </div>
@@ -72,7 +72,7 @@ export default async function HomePage() {
           </div>
         </section>
       ) : (
-        <section>Chưa có bài viết</section>
+        <section></section>
       )}
 
       <FeaturedSwiper />
@@ -90,7 +90,7 @@ export default async function HomePage() {
                     style="big-news-right-text"
                     title={news[0].articles[0].title}
                     summary={news[0].articles[0].summary}
-                    image={news[0].articles[0].thumbnail}
+                    image={news[0].articles[0].thumbnail || ""}
                   />
                 </Link>
               </div>
@@ -104,7 +104,7 @@ export default async function HomePage() {
                       key={index}
                       style="medium-news-right-text"
                       title={article.articles[index].title}
-                      image={article.articles[index].thumbnail}
+                      image={article.articles[index].thumbnail || ""}
                     />
                   </Link>
                 ))}
@@ -119,7 +119,11 @@ export default async function HomePage() {
           </div>
         </section>
       ) : (
-        <section>Chưa có bài viết</section>
+        <section>
+          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+            Tin tức - Sự kiện
+          </h2>
+        </section>
       )}
 
       {activities && activities.length > 0 ? (
@@ -130,12 +134,14 @@ export default async function HomePage() {
                 Hoạt động
               </h2>
               <div className="space-y-3">
-                <Link href={`/${activities[0].category}/${activities[0].articles[0].slug}`}>
+                <Link
+                  href={`/${activities[0].category}/${activities[0].articles[0].slug}`}
+                >
                   <ArticleCard
                     style="big-news-right-text"
                     title={activities[0].articles[0].title}
                     summary={activities[0].articles[0].summary}
-                    image={activities[0].articles[0].thumbnail}
+                    image={activities[0].articles[0].thumbnail || ""}
                   />
                 </Link>
               </div>
@@ -146,13 +152,12 @@ export default async function HomePage() {
                     href={`/${article.category}/${article.articles[index].slug}`}
                   >
                     <ArticleCard
-                    key={index}
-                    style="medium-news"
-                    title={article.articles[index].title}
-                    image={article.articles[index].thumbnail}
-                  />
+                      key={index}
+                      style="medium-news"
+                      title={article.articles[index].title}
+                      image={article.articles[index].thumbnail || ""}
+                    />
                   </Link>
-                  
                 ))}
               </div>
             </div>
@@ -165,10 +170,14 @@ export default async function HomePage() {
           </div>
         </section>
       ) : (
-        <section>Chưa có bài viết</section>
+        <section>
+          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+                Hoạt động
+              </h2>
+        </section>
       )}
       <section>
-        <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3 mb-6">
+        <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
           Thư viện
         </h2>
 

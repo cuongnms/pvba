@@ -61,7 +61,6 @@ export async function listArticles({
           category: 1,
           thumbnail: 1,
           createdAt: 1,
-          contentHtml: 1, // thêm nếu muốn trả về contentHtml
         },
       })
       .sort({ createdAt: -1 })

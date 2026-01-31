@@ -36,8 +36,8 @@ export default function ArticleCard({
       <article className="flex flex-col">
         <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
           <Image
-            src={image}
-            alt={title}
+            src={image || ""}
+            alt={title || "default image"}
             fill
             unoptimized
             className="object-cover"
@@ -58,8 +58,8 @@ export default function ArticleCard({
         <article className="flex flex-col">
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
             <Image
-              src={image}
-              alt={title}
+              src={image || ""}
+            alt={title || "default image"}
               fill
               unoptimized
               className="object-cover"
@@ -82,8 +82,8 @@ export default function ArticleCard({
         <article className="flex flex-col">
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
             <Image
-              src={image}
-              alt={title}
+              src={image || ""}
+            alt={title || "default image"}
               fill
               unoptimized
               className="object-cover"
@@ -106,8 +106,8 @@ export default function ArticleCard({
         <article className="max-sm:flex max-sm:flex-col md:grid md:grid-cols-2 md:gap-4">
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg md:col-span-1">
             <Image
-              src={image}
-              alt={title}
+              src={image || ""}
+            alt={title || "default image"}
               fill
               unoptimized
               className="object-cover"
@@ -140,8 +140,8 @@ export default function ArticleCard({
           </div>
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg md:col-span-1">
             <Image
-              src={image}
-              alt={title}
+              src={image || ""}
+            alt={title || "default image"}
               fill
               unoptimized
               className="object-cover"
@@ -158,8 +158,8 @@ export default function ArticleCard({
         <article className="max-sm:flex max-sm:flex-col md:grid md:grid-cols-3 md:gap-4">
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg md:col-span-1">
             <Image
-              src={image}
-              alt={title}
+              src={image || ""}
+            alt={title || "default image"}
               fill
               unoptimized
               className="object-cover"
@@ -192,8 +192,8 @@ export default function ArticleCard({
       "
         >
           <Image
-            src={image}
-            alt={title}
+              src={image || ""}
+            alt={title || "default image"}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
