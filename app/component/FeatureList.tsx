@@ -17,7 +17,7 @@ export default async function FeatureList({
     <section className="mt-[2%]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
-          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+          <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
             {label}
           </h2>
           {articles && articles.length > 0 ? (
@@ -26,8 +26,8 @@ export default async function FeatureList({
                 <ArticleCard
                   style="big-news-right-text"
                   title={articles[0].title}
-                  summary="Viettel tăng trưởng bứt phá, kinh doanh hiệu quả năm 2025"
-                  image="/img/news/new-1.jpg"
+                  summary={articles[0].summary}
+                  image={articles[0].thumbnail || ""}
                 />
               </div>
               <div className="flex flex-col my-6 gap-6">
@@ -46,7 +46,7 @@ export default async function FeatureList({
           )}
         </div>
         <div className="md:col-span-1">
-          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+          <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
             Xem nhiều
           </h2>
         </div>

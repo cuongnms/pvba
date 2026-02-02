@@ -81,7 +81,7 @@ export default async function HomePage() {
         <section>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
-              <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+              <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
                 Tin tức - Sự kiện
               </h2>
               <div className="space-y-3">
@@ -111,7 +111,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+              <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
                 Gương mặt doanh nhân
               </h2>
               <MemberList />
@@ -120,7 +120,7 @@ export default async function HomePage() {
         </section>
       ) : (
         <section>
-          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+          <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
             Tin tức - Sự kiện
           </h2>
         </section>
@@ -130,7 +130,7 @@ export default async function HomePage() {
         <section>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
-              <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+              <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
                 Hoạt động
               </h2>
               <div className="space-y-3">
@@ -162,7 +162,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+              <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
                 Tra cứu
               </h2>
               <MemberList />
@@ -171,13 +171,13 @@ export default async function HomePage() {
         </section>
       ) : (
         <section>
-          <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+          <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
                 Hoạt động
               </h2>
         </section>
       )}
       <section>
-        <h2 className="md:text-[2vw] font-bold border-l-4 border-red-600 pl-3 mb-6">
+        <h2 className="md:text-[clamp(16px,2vw,20px)] font-bold border-l-4 border-red-600 pl-3 mb-6">
           Thư viện
         </h2>
 
