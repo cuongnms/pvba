@@ -23,21 +23,29 @@ export default async function FeatureList({
           {articles && articles.length > 0 ? (
             <>
               <div className="space-y-3">
-                <ArticleCard
-                  style="big-news-right-text"
-                  title={articles[0].title}
-                  summary={articles[0].summary}
-                  image={articles[0].thumbnail || ""}
-                />
+                <Link
+                  href={`/${articles[0].category}/${articles[0].articles[0].slug}`}
+                >
+                  <ArticleCard
+                    style="big-news-right-text"
+                    title={articles[0].title}
+                    summary={articles[0].summary}
+                    image={articles[0].thumbnail || ""}
+                  />
+                </Link>
               </div>
               <div className="flex flex-col my-6 gap-6">
                 {articles.slice(1).map((article, i) => (
+                  <Link
+                  href={`/${article.category}/${article.slug}`}
+                >
                   <ArticleCard
                     key={i}
                     style="medium-news-right-text"
                     title={article.title}
                     image={article.thumbnail}
                   />
+                  </Link>
                 ))}
               </div>
             </>
