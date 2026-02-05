@@ -32,8 +32,8 @@ export default function HeaderNavbar({ menu }: { menu: MenuItem[] }) {
         <div className="border-b max-sm:hidden bg-white text-black">
           <div className="max-w-[1200px] mx-auto px-4 py-3 flex items-center justify-between">
             <Image
-              src="/img/logo.jpg"
-              alt="Viettel Family"
+              src="/img/logo-pvba.jpg"
+              alt=""
               width={160}
               height={40}
             />
@@ -72,7 +72,7 @@ export default function HeaderNavbar({ menu }: { menu: MenuItem[] }) {
         {/* MOBILE */}
         <div className="sm:hidden border-b bg-white text-black ">
           <div className="px-4 h-12 flex items-center">
-            <Image src="/img/logo.jpg" alt="logo" width={100} height={36} />
+            <Image src="/img/logo-pvba.jpg" alt="logo" width={70} height={30} />
             <div className="flex-1" />
             <LoginButton />
             <button

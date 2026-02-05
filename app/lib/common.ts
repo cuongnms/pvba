@@ -8,6 +8,7 @@ export type MenuItem = {
 
 
 export const MENU: MenuItem[] = [
+  {label: "Trang chủ", href: "/"},
   { label: "Giới thiệu", href: "/gioi-thieu" },
   { label: "Tin tức - Sự kiện", href: "/tin-tuc-su-kien" },
   { label: "Hoạt động", href: "/hoat-dong" },
