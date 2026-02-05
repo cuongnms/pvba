@@ -25,7 +25,7 @@ export default async function FeatureList({
             <>
               <div className="space-y-3">
                 <Link
-                  href={`/${articles[0].category}/${articles[0].articles[0].slug}`}
+                  href={`/${articles[0].category}/${articles[0].slug}`}
                 >
                   <ArticleCard
                     style="big-news-right-text"
