@@ -3,6 +3,7 @@ import { Article, ArticleCategory } from "../types/model";
 import ArticleCard from "./ArticleCard";
 import { ArticleFormat, ArticleSize } from "../types/ui";
 import { listArticles } from "../services/article";
+import Link from "next/link";
 
 export default async function FeatureList({
   category,
