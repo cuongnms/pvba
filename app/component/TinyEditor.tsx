@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { Article, ArticleCategory, ArticleUpdateInput } from "../types/model";
 import { Editor as TinyMCEInstance } from "tinymce";
 import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation'
+
 const CATEGORY_OPTIONS: {
   value: ArticleCategory;
   label: string;
@@ -30,6 +32,7 @@ export default function TinyEditor({ article }: TinyEditorProps) {
   const [uploadingThumb, setUploadingThumb] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+   const router = useRouter();
   useEffect(() => {
     if (!article) return;
 
@@ -96,7 +99,7 @@ export default function TinyEditor({ article }: TinyEditorProps) {
 
       const data = await res.json();
       if (data.success) {
-        alert("Article updated successfully");
+        alert("Tạo bài viết thành công");
       } else {
         alert("Error: " + data.error);
       }
@@ -122,11 +125,12 @@ export default function TinyEditor({ article }: TinyEditorProps) {
 
       const data = await res.json();
       if (data.success) {
-        alert("Article created successfully");
+        alert("Cập nhật bài viết thành công");
       } else {
         alert("Error: " + data.error);
       }
     }
+    router.push('/admin/bai-viet');
   };
   return (
     <div className="space-y-4">
