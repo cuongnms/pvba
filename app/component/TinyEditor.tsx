@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Article, ArticleCategory, ArticleUpdateInput } from "../types/model";
 import { Editor as TinyMCEInstance } from "tinymce";
 import { useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 const CATEGORY_OPTIONS: {
   value: ArticleCategory;
@@ -32,7 +32,7 @@ export default function TinyEditor({ article }: TinyEditorProps) {
   const [uploadingThumb, setUploadingThumb] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-   const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     if (!article) return;
 
@@ -130,7 +130,7 @@ export default function TinyEditor({ article }: TinyEditorProps) {
         alert("Error: " + data.error);
       }
     }
-    router.push('/admin/bai-viet');
+    router.push("/admin/bai-viet");
   };
   return (
     <div className="space-y-4">
@@ -220,7 +220,11 @@ export default function TinyEditor({ article }: TinyEditorProps) {
             "alignleft aligncenter alignright alignjustify | " +
             "bullist numlist outdent indent | " +
             "link image table | code",
-          // images_upload_url: "/api/upload",
+          content_style: `
+      table { border-collapse: collapse; width: 100%; }
+      table, td, th { border: 1px solid #999; }
+    `,
+
           images_upload_handler: async (blobInfo) => {
             const formData = new FormData();
             formData.append("file", blobInfo.blob(), blobInfo.filename());
